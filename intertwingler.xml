@@ -16,7 +16,7 @@
       xml:lang="en">
   <head>
     <title about="#" property="dct:title">Intertwingler Configuration Vocabulary</title>
-    <base href="https://vocab.methodandstructure.com/stretchtext"/>
+    <base href="https://vocab.methodandstructure.com/intertwingler"/>
     <meta about="#" property="vann:preferredNamespacePrefix" content="stv"/>
     <link about="#" rel="rdfs:isDefinedBy bibo:uri" href="#"/>
   </head>

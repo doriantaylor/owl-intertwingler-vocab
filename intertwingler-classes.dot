@@ -1,0 +1,23 @@
+digraph {
+    graph [bgcolor=transparent];
+    node [shape=box,color="#000000",fontcolor="#000000",fontname="Lucida Grande, Lucida Sans Unicode, sans-serif"];
+    edge [color="#000000",fontcolor="#000000",fontname="Lucida Grande, Lucida Sans Unicode, sans-serif"];
+
+
+    // third-party stuff
+
+    subgraph {
+        node [style=dashed];
+    }
+
+    itcv_Handler [label="itcv:Handler", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Handler"];
+    itcv_Engine [label="itcv:Engine", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Engine"];
+    itcv_Transform [label="itcv:Transform", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Transform"];
+
+    subgraph {
+        edge [style=dashed, label="rdfs:subClassOf"];
+
+        itcv_Engine    -> itcv_Handler;
+        itcv_Transform -> itcv_Handler;
+    }
+}

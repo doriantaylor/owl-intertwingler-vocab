@@ -9,7 +9,7 @@ Created
 September 6, 2023
 
 Namespace URI  
-[`https://vocab.methodandstructure.com/intertwingler#`](https://vocab.methodandstructure.com/stretchtext#)
+[`https://vocab.methodandstructure.com/intertwingler#`](https://vocab.methodandstructure.com/intertwingler#)
 
 Preferred Namespace Prefix  
 `itcv`
@@ -24,6 +24,8 @@ a dense hypermedia engine.
 
 ## Classes
 
+![](https://vocab.methodandstructure.com/intertwingler-classes)
+
 <div id="Handler" class="section" about="[itcv:Handler]"
 typeof="owl:Class">
 
@@ -32,7 +34,7 @@ typeof="owl:Class">
 An `itcv:Handler` is the basic unit of functionality in Intertwingler.
 Handlers are microservices that encapsulate one or more URIs.
 
-<a href="https://vocab.methodandstructure.com/stretchtext#"
+<a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>
@@ -46,10 +48,10 @@ An `itcv:Engine` is the specialized `itcv:Handler` that *is* responsible
 for marshalling all other handlers and transforms.
 
 Subclass of:  
-<a href="https://vocab.methodandstructure.com/stretchtext#Handler"
+<a href="https://vocab.methodandstructure.com/intertwingler#Handler"
 rel="rdfs:subClassOf"><code>itcv:Handler</code></a>
 
-<a href="https://vocab.methodandstructure.com/stretchtext#"
+<a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>
@@ -63,10 +65,10 @@ An `itcv:Transform` is a special-purpose `itcv:Handler` that is
 responsible for transforming HTTP message bodies.
 
 Subclass of:  
-<a href="https://vocab.methodandstructure.com/stretchtext#Handler"
+<a href="https://vocab.methodandstructure.com/intertwingler#Handler"
 rel="rdfs:subClassOf"><code>itcv:Handler</code></a>
 
-<a href="https://vocab.methodandstructure.com/stretchtext#"
+<a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>

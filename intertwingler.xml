@@ -38,6 +38,9 @@
     </div>
     <section>
       <h2>Classes</h2>
+      <figure>
+        <object data="intertwingler-classes.svg"><img src="intertwingler-classes" alt=""/></object>
+      </figure>
       <section id="Handler" about="[itcv:Handler]" typeof="owl:Class">
         <h3 property="rdfs:label"><code>Handler</code></h3>
         <p property="rdfs:comment">An <code>itcv:Handler</code> is the basic unit of functionality in Intertwingler. Handlers are microservices that encapsulate one or more URIs.</p>

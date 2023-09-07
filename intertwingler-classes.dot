@@ -8,11 +8,16 @@ digraph {
 
     subgraph {
         node [style=dashed];
+        tfo_Queue [label="tfo:Queue", target="_parent", href="https://vocab.methodandstructure.com/transformation#Queue"];
     }
+
+    // our classes
 
     itcv_Handler [label="itcv:Handler", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Handler"];
     itcv_Engine [label="itcv:Engine", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Engine"];
     itcv_Transform [label="itcv:Transform", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Transform"];
+
+    // subclass relations
 
     subgraph {
         edge [style=dashed, label="rdfs:subClassOf"];
@@ -20,4 +25,8 @@ digraph {
         itcv_Engine    -> itcv_Handler;
         itcv_Transform -> itcv_Handler;
     }
+
+    // main relations
+
+    itcv_Handler -> tfo_Queue [label="itcv:transform-queue"];
 }

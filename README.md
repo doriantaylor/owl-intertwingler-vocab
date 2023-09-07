@@ -32,7 +32,8 @@ typeof="owl:Class">
 ### `Handler`
 
 An `itcv:Handler` is the basic unit of functionality in Intertwingler.
-Handlers are microservices that encapsulate one or more URIs.
+Handlers are <span class="dfn">microservices</span> that serve one or
+more URIs via one or more HTTP request metehods.
 
 <a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
@@ -44,8 +45,9 @@ typeof="owl:Class">
 
 ### `Engine`
 
-An `itcv:Engine` is the specialized `itcv:Handler` that *is* responsible
-for marshalling all other handlers and transforms.
+An `itcv:Engine` is the (as in unitary per instance) specialized
+`itcv:Handler` that is responsible for marshalling all other handlers
+and transforms.
 
 Subclass of:  
 <a href="https://vocab.methodandstructure.com/intertwingler#Handler"

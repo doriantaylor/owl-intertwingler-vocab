@@ -20,7 +20,7 @@
     <meta about="#" property="vann:preferredNamespacePrefix" content="stv"/>
     <link about="#" rel="rdfs:isDefinedBy bibo:uri" href="#"/>
   </head>
-  <body typeof="bibo:Webpage">
+  <body typeof="bibo:Specification">
     <div rel="foaf:primaryTopic" resource="#" typeof="owl:Ontology">
       <dl>
         <dt>Author</dt>
@@ -43,7 +43,7 @@
       </figure>
       <section id="Handler" about="[itcv:Handler]" typeof="owl:Class">
         <h3 property="rdfs:label"><code>Handler</code></h3>
-        <p property="rdfs:comment">An <code>itcv:Handler</code> is the basic unit of functionality in Intertwingler. Handlers are microservices that encapsulate one or more URIs.</p>
+        <p property="rdfs:comment">An <code>itcv:Handler</code> is the basic unit of functionality in Intertwingler. Handlers are <dfn>microservices</dfn> that serve one or more <abbr>URIs</abbr> via one or more <abbr>HTTP</abbr> request metehods.</p>
         <dl>
           <!--<dt>Subclass of:</dt>
           <dd><a rel="external rdfs:subClassOf" href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a></dd>
@@ -62,7 +62,7 @@
       </section>
       <section id="Engine" about="[itcv:Engine]" typeof="owl:Class">
         <h3 property="rdfs:label"><code>Engine</code></h3>
-        <p property="rdfs:comment">An <code>itcv:Engine</code> is the specialized <code>itcv:Handler</code> that <em>is</em> responsible for marshalling all other handlers and transforms.</p>
+        <p property="rdfs:comment">An <code>itcv:Engine</code> is the (as in unitary per instance) specialized <code>itcv:Handler</code> that is responsible for marshalling all other handlers and transforms.</p>
         <dl>
           <dt>Subclass of:</dt>
           <dd><a rel="rdfs:subClassOf" href="#Handler"><code>itcv:Handler</code></a></dd>

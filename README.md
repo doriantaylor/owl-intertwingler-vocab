@@ -98,6 +98,36 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>
 
+<div id="HandlerList" class="section" about="[itcv:HandlerList]"
+typeof="owl:Class">
+
+### `HandlerList`
+
+An `itcv:HandlerList` is a list of handlers and only handlers.
+
+Subclass of:  
+<a href="https://www.w3.org/TR/rdf-schema/#ch_list"
+rel="rdfs:subClassOf" resource="rdf:List"><code>rdf:List</code></a>
+
+Property restrictions:  
+<a href="https://www.w3.org/TR/rdf-schema/#ch_first"
+rel="owl:onProperty" resource="rdf:first"><code>rdf:first</code></a> ∈
+<a href="https://vocab.methodandstructure.com/intertwingler#Handler"
+rel="owl:allValuesFrom"><code>itcv:Handler</code></a>
+
+<a href="https://www.w3.org/TR/rdf-schema/#ch_rest" rel="owl:onProperty"
+resource="rdf:rest"><code>rdf:rest</code></a> ∈ <span
+rel="owl:allValuesFrom" resource="_:uo1"> <span rel="owl:unionOf"
+resource="_:q1">(<a href="https://vocab.methodandstructure.com/intertwingler#HandlerList"
+rel="rdf:first"><code>itcv:HandlerList</code></a> <span about="_:q1"
+rel="rdf:rest" resource="_:q2">∪</span> <span about="_:q2"
+rel="rdf:first"
+resource="_:hv1">{<a href="https://www.w3.org/TR/rdf-schema/#ch_nil" rel="owl:hasValue"
+resource="rdf:nil"><code>rdf:nil</code></a>}<span about="_:q2"
+rel="rdf:rest" resource="rdf:nil">)</span></span> </span> </span>
+
+</div>
+
 </div>
 
 <div class="section">
@@ -107,6 +137,52 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 <div class="section">
 
 ### Bundling Handlers
+
+<div id="handler" class="section" about="[itcv:handler]"
+typeof="owl:ObjectProperty">
+
+#### `handler`
+
+This property relates a handler to the engine.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Engine"
+rel="rdfs:domain"><code>itcv:Engine</code></a>
+
+Range:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Handler"
+rel="rdfs:range"><code>itcv:Handler</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="handler-list" class="section" about="[itcv:handler-list]"
+typeof="owl:ObjectProperty owl:FunctionalProperty">
+
+#### `handler-list`
+
+This property relates an ordered list of handlers to the engine.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Engine"
+rel="rdfs:domain"><code>itcv:Engine</code></a>
+
+Range:  
+<a href="https://vocab.methodandstructure.com/intertwingler#HandlerList"
+rel="rdfs:range"><code>itcv:HandlerList</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+</div>
+
+<div class="section">
+
+### Selecting Queues
 
 <div id="queue" class="section" about="[itcv:queue]"
 typeof="owl:ObjectProperty owl:FunctionalProperty">

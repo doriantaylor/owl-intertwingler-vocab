@@ -8,17 +8,20 @@
       xmlns:dct="http://purl.org/dc/terms/"
       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
       xmlns:bibo="http://purl.org/ontology/bibo/"
+      xmlns:bs="http://purl.org/ontology/bibo/status/"
       xmlns:foaf="http://xmlns.com/foaf/0.1/"
       xmlns:vann="http://purl.org/vocab/vann/"
+      xmlns:tfo="https://vocab.methodandstructure.com/transformation#"
       xmlns:itcv="https://vocab.methodandstructure.com/intertwingler#"
-      prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dct: http://purl.org/dc/terms/ skos: http://www.w3.org/2004/02/skos/core# bibo: http://purl.org/ontology/bibo/ foaf: http://xmlns.com/foaf/0.1/ vann: http://purl.org/vocab/vann/ itcv: https://vocab.methodandstructure.com/intertwingler#"
+      prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dct: http://purl.org/dc/terms/ skos: http://www.w3.org/2004/02/skos/core# bibo: http://purl.org/ontology/bibo/ bs: http://purl.org/ontology/bibo/status/ foaf: http://xmlns.com/foaf/0.1/ vann: http://purl.org/vocab/vann/ tfo: https://vocab.methodandstructure.com/transformation# itcv: https://vocab.methodandstructure.com/intertwingler#"
       vocab="http://www.w3.org/1999/xhtml/vocab#"
       xml:lang="en">
   <head>
     <title about="#" property="dct:title">Intertwingler Configuration Vocabulary</title>
     <base href="https://vocab.methodandstructure.com/intertwingler"/>
-    <meta about="#" property="vann:preferredNamespacePrefix" content="itcv"/>
+    <meta about="#" property="vann:preferredNamespacePrefix" content="itcv" datatype="xsd:token"/>
     <link about="#" rel="rdfs:isDefinedBy bibo:uri" href="#"/>
+    <link rel="bibo:status" href="http://purl.org/ontology/bibo/status/draft"/>
   </head>
   <body typeof="bibo:Specification">
     <div rel="foaf:primaryTopic" resource="#" typeof="owl:Ontology">
@@ -32,7 +35,7 @@
         <dt>Namespace URI</dt>
         <dd><a href="#"><code>https://vocab.methodandstructure.com/intertwingler#</code></a></dd>
         <dt>Preferred Namespace Prefix</dt>
-        <dd><code about="#" property="vann:preferredNamespacePrefix">itcv</code></dd>
+        <dd><code about="#" property="vann:preferredNamespacePrefix" datatype="xsd:token">itcv</code></dd>
       </dl>
       <p property="rdfs:comment dct:description">This document specifies the on-line configuration vocabulary for <a rel="dct:subject" href="https://intertwingler.net/">Intertwingler</a>, a <dfn>dense hypermedia</dfn> engine.</p>
     </div>
@@ -87,11 +90,56 @@
         </dl>
         <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
       </section>
+      <section id="HandlerList" about="[itcv:HandlerList]" typeof="owl:Class">
+        <h3 property="rdfs:label"><code>HandlerList</code></h3>
+        <p property="rdfs:comment">An <code>itcv:HandlerList</code> is a list of handlers and only handlers.</p>
+        <dl>
+          <dt>Subclass of:</dt>
+          <dd><a rel="rdfs:subClassOf" resource="rdf:List" href="https://www.w3.org/TR/rdf-schema/#ch_list"><code>rdf:List</code></a></dd>
+          <dt>Property restrictions:</dt>
+          <dd rel="rdfs:subClassOf" resource="_:op1">
+            <a rel="owl:onProperty" resource="rdf:first" href="https://www.w3.org/TR/rdf-schema/#ch_first"><code>rdf:first</code></a> &#x2208; <a rel="owl:allValuesFrom" href="#Handler"><code>itcv:Handler</code></a>
+          </dd>
+          <dd rel="rdfs:subClassOf" resource="_:op2">
+            <a rel="owl:onProperty" resource="rdf:rest" href="https://www.w3.org/TR/rdf-schema/#ch_rest"><code>rdf:rest</code></a> &#x2208;
+            <span rel="owl:allValuesFrom" resource="_:uo1">
+              <span rel="owl:unionOf" resource="_:q1">(<a rel="rdf:first" href="#HandlerList"><code>itcv:HandlerList</code></a> <span about="_:q1" rel="rdf:rest" resource="_:q2">&#x222a;</span>
+              <span about="_:q2" rel="rdf:first" resource="_:hv1">{<a rel="owl:hasValue" resource="rdf:nil" href="https://www.w3.org/TR/rdf-schema/#ch_nil"><code>rdf:nil</code></a>}<span about="_:q2" rel="rdf:rest" resource="rdf:nil">)</span></span>
+              </span>
+            </span>
+          </dd>
+        </dl>
+      </section>
     </section>
     <section>
       <h2>Properties</h2>
       <section>
         <h3>Bundling Handlers</h3>
+        <section id="handler" about="[itcv:handler]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>handler</code></h4>
+          <p property="rdfs:comment">This property relates a handler to the engine.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Engine"><code>itcv:Engine</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" href="#Handler"><code>itcv:Handler</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="handler-list" about="[itcv:handler-list]" typeof="owl:ObjectProperty owl:FunctionalProperty">
+          <h4 property="rdfs:label"><code>handler-list</code></h4>
+          <p property="rdfs:comment">This property relates an ordered list of handlers to the engine.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Engine"><code>itcv:Engine</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" href="#HandlerList"><code>itcv:HandlerList</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+      </section>
+      <section>
+        <h3>Selecting Queues</h3>
         <section id="queue" about="[itcv:queue]" typeof="owl:ObjectProperty owl:FunctionalProperty">
           <h4 property="rdfs:label"><code>queue</code></h4>
           <p property="rdfs:comment">The queue head is the entry point for the <dfn>transform</dfn> queue associated with the <code>itcv:Handler</code>,  or the default queue associated with the <code>itcv:Engine</code>. There should be exactly <em>one</em>.</p>

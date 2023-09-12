@@ -16,7 +16,7 @@ Preferred Namespace Prefix
 
 This document specifies the on-line configuration vocabulary for
 <a href="https://intertwingler.net/" rel="dct:subject">Intertwingler</a>,
-a dense hypermedia engine.
+a <span class="dfn">dense hypermedia</span> engine.
 
 </div>
 
@@ -33,7 +33,11 @@ typeof="owl:Class">
 
 An `itcv:Handler` is the basic unit of functionality in Intertwingler.
 Handlers are <span class="dfn">microservices</span> that serve one or
-more URIs via one or more HTTP request metehods.
+more URIs via one or more HTTP request methods.
+
+Properties:  
+<a href="https://vocab.methodandstructure.com/intertwingler#queue"
+rev="rdfs:domain"><code>itcv:queue</code></a>
 
 <a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
@@ -45,13 +49,21 @@ typeof="owl:Class">
 
 ### `Engine`
 
-An `itcv:Engine` is the (as in unitary per instance) specialized
+An `itcv:Engine` is *the* (as in the only one per instance) specialized
 `itcv:Handler` that is responsible for marshalling all other handlers
 and transforms.
 
 Subclass of:  
 <a href="https://vocab.methodandstructure.com/intertwingler#Handler"
 rel="rdfs:subClassOf"><code>itcv:Handler</code></a>
+
+Properties:  
+<a href="https://vocab.methodandstructure.com/intertwingler#handler"
+rev="rdfs:domain"><code>itcv:handler</code></a>
+
+<a
+href="https://vocab.methodandstructure.com/intertwingler#handler-list"
+rev="rdfs:domain"><code>itcv:handler-list</code></a>
 
 <a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
@@ -63,8 +75,15 @@ typeof="owl:Class">
 
 ### `Transform`
 
-An `itcv:Transform` is a special-purpose `itcv:Handler` that is
-responsible for transforming HTTP message bodies.
+An `itcv:Transform` is a special-purpose `itcv:Handler` that
+encapsulates a set of *actual* transformation functions, identified by
+their URIs, that interact via HTTP `POST`.
+
+The `itcv:Transform` class is different from the `tfo:Transform` insofar
+as the former is a *handler*, a potentially stand-alone <span
+class="dfn">microservice</span> that bundles together a set of
+individual service <span class="dfn">endpoints</span>, while the latter
+describes the individual service endpoints themselves.
 
 Subclass of:  
 <a href="https://vocab.methodandstructure.com/intertwingler#Handler"
@@ -80,5 +99,34 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 <div class="section">
 
 ## Properties
+
+<div class="section">
+
+### Bundling Handlers
+
+<div id="queue" class="section" about="[itcv:queue]"
+typeof="owl:ObjectProperty owl:FunctionalProperty">
+
+#### `queue`
+
+The queue head is the entry point for the <span
+class="dfn">transform</span> queue associated with the `itcv:Handler`,
+or the default queue associated with the `itcv:Engine`. There should be
+exactly *one*.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Handler"
+rel="rdfs:domain"><code>itcv:Handler</code></a>
+
+Range:  
+<a href="https://vocab.methodandstructure.com/transformation#Queue"
+rel="rdfs:range"><code>tfo:Queue</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+</div>
 
 </div>

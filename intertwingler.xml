@@ -17,7 +17,7 @@
   <head>
     <title about="#" property="dct:title">Intertwingler Configuration Vocabulary</title>
     <base href="https://vocab.methodandstructure.com/intertwingler"/>
-    <meta about="#" property="vann:preferredNamespacePrefix" content="stv"/>
+    <meta about="#" property="vann:preferredNamespacePrefix" content="itcv"/>
     <link about="#" rel="rdfs:isDefinedBy bibo:uri" href="#"/>
   </head>
   <body typeof="bibo:Specification">
@@ -28,13 +28,13 @@
         <dt>Created</dt>
         <dd property="dct:created" datatype="xsd:dateTime" content="2023-09-06T21:14:10Z">September 6, 2023</dd>
         <!--<dt>Updated</dt>
-        <dd property="2012-12-12T16:04:50-0800">December 12, 2012</dd>-->
+            <dd property="2012-12-12T16:04:50-0800">December 12, 2012</dd>-->
         <dt>Namespace URI</dt>
         <dd><a href="#"><code>https://vocab.methodandstructure.com/intertwingler#</code></a></dd>
         <dt>Preferred Namespace Prefix</dt>
         <dd><code about="#" property="vann:preferredNamespacePrefix">itcv</code></dd>
       </dl>
-      <p property="rdfs:comment dct:description">This document specifies the on-line configuration vocabulary for <a rel="dct:subject" href="https://intertwingler.net/">Intertwingler</a>, a dense hypermedia engine.</p>
+      <p property="rdfs:comment dct:description">This document specifies the on-line configuration vocabulary for <a rel="dct:subject" href="https://intertwingler.net/">Intertwingler</a>, a <dfn>dense hypermedia</dfn> engine.</p>
     </div>
     <section>
       <h2>Classes</h2>
@@ -43,103 +43,72 @@
       </figure>
       <section id="Handler" about="[itcv:Handler]" typeof="owl:Class">
         <h3 property="rdfs:label"><code>Handler</code></h3>
-        <p property="rdfs:comment">An <code>itcv:Handler</code> is the basic unit of functionality in Intertwingler. Handlers are <dfn>microservices</dfn> that serve one or more <abbr>URIs</abbr> via one or more <abbr>HTTP</abbr> request metehods.</p>
+        <p property="rdfs:comment">An <code>itcv:Handler</code> is the basic unit of functionality in Intertwingler. Handlers are <dfn>microservices</dfn> that serve one or more <abbr>URIs</abbr> via one or more <abbr>HTTP</abbr> request methods.</p>
         <dl>
           <!--<dt>Subclass of:</dt>
-          <dd><a rel="external rdfs:subClassOf" href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a></dd>
-          <dt>Disjoint with:</dt>
-          <dd><a rel="owl:disjointWith" href="#Position">ibis:Position</a></dd>
-          <dd><a rel="owl:disjointWith" href="#Argument">ibis:Argument</a></dd>
+              <dd><a rel="external rdfs:subClassOf" href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a></dd>
+              <dt>Disjoint with:</dt>
+              <dd><a rel="owl:disjointWith" href="#Position">ibis:Position</a></dd>
+              <dd><a rel="owl:disjointWith" href="#Argument">ibis:Argument</a></dd>
           -->
-          <!--
           <dt>Properties:</dt>
-          <dd><a rev="rdfs:domain" href="#initial"><code>initial</code></a></dd>
-          <dd><a rev="rdfs:domain" href="#replace-with"><code>replace-with</code></a></dd>
-          <dd><a rev="rdfs:domain" href="#append"><code>append</code></a></dd>
-          <dd><a rev="rdfs:domain" href="#prepend"><code>prepend</code></a></dd>-->
+          <dd><a rev="rdfs:domain" href="#queue"><code>itcv:queue</code></a></dd>
         </dl>
         <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
       </section>
       <section id="Engine" about="[itcv:Engine]" typeof="owl:Class">
         <h3 property="rdfs:label"><code>Engine</code></h3>
-        <p property="rdfs:comment">An <code>itcv:Engine</code> is the (as in unitary per instance) specialized <code>itcv:Handler</code> that is responsible for marshalling all other handlers and transforms.</p>
+        <p property="rdfs:comment">An <code>itcv:Engine</code> is <em>the</em> (as in the only one per instance) specialized <code>itcv:Handler</code> that is responsible for marshalling all other handlers and transforms.</p>
         <dl>
           <dt>Subclass of:</dt>
           <dd><a rel="rdfs:subClassOf" href="#Handler"><code>itcv:Handler</code></a></dd>
-          <!--
           <dt>Properties:</dt>
-          <dd><a rev="rdfs:domain" href="#initial"><code>initial</code></a></dd>
-          <dd><a rev="rdfs:domain" href="#replace-with"><code>replace-with</code></a></dd>
-          <dd><a rev="rdfs:domain" href="#append"><code>append</code></a></dd>
-          <dd><a rev="rdfs:domain" href="#prepend"><code>prepend</code></a></dd>-->
+          <dd><a rev="rdfs:domain" href="#handler"><code>itcv:handler</code></a></dd>
+          <dd><a rev="rdfs:domain" href="#handler-list"><code>itcv:handler-list</code></a></dd>
         </dl>
         <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
       </section>
       <section id="Transform" about="[itcv:Transform]" typeof="owl:Class">
         <h3 property="rdfs:label"><code>Transform</code></h3>
-        <p property="rdfs:comment">An <code>itcv:Transform</code> is a special-purpose <code>itcv:Handler</code> that is responsible for transforming <abbr>HTTP</abbr> message bodies.</p>
+        <p property="rdfs:comment">An <code>itcv:Transform</code> is a special-purpose <code>itcv:Handler</code> that encapsulates a set of <em>actual</em> transformation functions, identified by their <abbr>URIs</abbr>, that interact via <abbr>HTTP</abbr> <code>POST</code>.</p>
+        <aside role="note" property="skos:note">
+          <p>The <code>itcv:Transform</code> class is different from the <code>tfo:Transform</code> insofar as the former is a <em>handler</em>, a potentially stand-alone <dfn>microservice</dfn> that bundles together a set of individual service <dfn>endpoints</dfn>, while the latter describes the individual service endpoints themselves.</p>
+        </aside>
         <dl>
           <dt>Subclass of:</dt>
           <dd><a rel="rdfs:subClassOf" href="#Handler"><code>itcv:Handler</code></a></dd>
           <!--
-          <dt>Properties:</dt>
-          <dd><a rev="rdfs:domain" href="#initial"><code>initial</code></a></dd>
-          <dd><a rev="rdfs:domain" href="#replace-with"><code>replace-with</code></a></dd>
-          <dd><a rev="rdfs:domain" href="#append"><code>append</code></a></dd>
-          <dd><a rev="rdfs:domain" href="#prepend"><code>prepend</code></a></dd>-->
+              <dt>Properties:</dt>
+              <dd><a rev="rdfs:domain" href="#initial"><code>initial</code></a></dd>
+              <dd><a rev="rdfs:domain" href="#replace-with"><code>replace-with</code></a></dd>
+              <dd><a rev="rdfs:domain" href="#append"><code>append</code></a></dd>
+              <dd><a rev="rdfs:domain" href="#prepend"><code>prepend</code></a></dd>-->
         </dl>
         <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
       </section>
     </section>
     <section>
       <h2>Properties</h2>
-      <!--
-      <section id="initial" about="[stv:initial]" typeof="owl:ObjectProperty owl:FunctionalProperty">
-        <h3 property="rdfs:label"><code>initial</code></h3>
-        <p property="rdfs:comment">This property denotes the initial value of a run of stretchtext.</p>
-        <dl>
-          <dt>Domain:</dt>
-          <dd><a rel="rdfs:domain" href="#StretchText"><code>stv:StretchText</code></a></dd>
-          <dt>Cardinality:</dt>
-          <dd property="owl:cardinality" datatype="xsd:integer">1</dd>
-        </dl>
-        <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+      <section>
+        <h3>Bundling Handlers</h3>
+        <section id="queue" about="[itcv:queue]" typeof="owl:ObjectProperty owl:FunctionalProperty">
+          <h4 property="rdfs:label"><code>queue</code></h4>
+          <p property="rdfs:comment">The queue head is the entry point for the <dfn>transform</dfn> queue associated with the <code>itcv:Handler</code>,  or the default queue associated with the <code>itcv:Engine</code>. There should be exactly <em>one</em>.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Handler"><code>itcv:Handler</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" href="/transformation#Queue"><code>tfo:Queue</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
       </section>
-      <section id="replace-with" about="[stv:replace-with]" typeof="owl:ObjectProperty owl:FunctionalProperty">
-        <h3 property="rdfs:label"><code>replace-with</code></h3>
-        <p property="rdfs:comment">When the subject stretchtext is activated, replace the initial value with the object.</p>
-        <dl>
-          <dt>Domain:</dt>
-          <dd><a rel="rdfs:domain" href="#StretchText"><code>stv:StretchText</code></a></dd>
-          <dt>Maximum Cardinality:</dt>
-          <dd property="owl:maxCardinality" datatype="xsd:integer">1</dd>
-        </dl>
-        <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
-      </section>
-      <section id="append" about="[stv:append]" typeof="owl:ObjectProperty">
-        <h3 property="rdfs:label"><code>append</code></h3>
-        <p property="rdfs:comment">When the subject stretchtext is activated, put the object <em>after</em> the initial value (or its replacement).</p>
-        <dl>
-          <dt>Domain:</dt>
-          <dd><a rel="rdfs:domain" href="#StretchText"><code>stv:StretchText</code></a></dd>
-        </dl>
-        <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
-      </section>
-      <section id="prepend" about="[stv:prepend]" typeof="owl:ObjectProperty">
-        <h3 property="rdfs:label"><code>prepend</code></h3>
-        <p property="rdfs:comment">When the subject stretchtext is activated, put the object <em>before</em> the initial value (or its replacement).</p>
-        <dl>
-          <dt>Domain:</dt>
-          <dd><a rel="rdfs:domain" href="#StretchText"><code>stv:StretchText</code></a></dd>
-        </dl>
-        <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
-      </section>-->
     </section>
     <!--
-    <section>
-      <h2>References</h2>
-      <ul>
-      </ul>
-    </section>-->
+        <section>
+        <h2>References</h2>
+        <ul>
+        </ul>
+        </section>-->
   </body>
 </html>

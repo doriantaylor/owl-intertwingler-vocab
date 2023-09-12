@@ -65,6 +65,10 @@ rev="rdfs:domain"><code>itcv:handler</code></a>
 href="https://vocab.methodandstructure.com/intertwingler#handler-list"
 rev="rdfs:domain"><code>itcv:handler-list</code></a>
 
+<a
+href="https://vocab.methodandstructure.com/intertwingler#request-queue"
+rev="rdfs:domain"><code>itcv:request-queue</code></a>
+
 <a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
 
@@ -117,6 +121,27 @@ exactly *one*.
 Domain:  
 <a href="https://vocab.methodandstructure.com/intertwingler#Handler"
 rel="rdfs:domain"><code>itcv:Handler</code></a>
+
+Range:  
+<a href="https://vocab.methodandstructure.com/transformation#Queue"
+rel="rdfs:range"><code>tfo:Queue</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="request-queue" class="section" about="[itcv:request-queue]"
+typeof="owl:ObjectProperty owl:FunctionalProperty">
+
+#### `request-queue`
+
+The engine, which inherits the relation `tfo:queue`, also has a queue
+for *request* transforms.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Engine"
+rel="rdfs:domain"><code>itcv:Engine</code></a>
 
 Range:  
 <a href="https://vocab.methodandstructure.com/transformation#Queue"

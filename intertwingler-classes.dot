@@ -33,5 +33,6 @@ digraph {
 
     itcv_Engine  -> itcv_Handler [label="itcv:handler"];
     itcv_Engine  -> itcv_HandlerList [label="itcv:handler-list"];
+    itcv_Engine  -> tfo_Queue [label="itcv:request-queue"];
     itcv_Handler -> tfo_Queue [label="itcv:queue"];
 }

@@ -65,6 +65,7 @@
           <dt>Properties:</dt>
           <dd><a rev="rdfs:domain" href="#handler"><code>itcv:handler</code></a></dd>
           <dd><a rev="rdfs:domain" href="#handler-list"><code>itcv:handler-list</code></a></dd>
+          <dd><a rev="rdfs:domain" href="#request-queue"><code>itcv:request-queue</code></a></dd>
         </dl>
         <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
       </section>
@@ -97,6 +98,17 @@
           <dl>
             <dt>Domain:</dt>
             <dd><a rel="rdfs:domain" href="#Handler"><code>itcv:Handler</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" href="/transformation#Queue"><code>tfo:Queue</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="request-queue" about="[itcv:request-queue]" typeof="owl:ObjectProperty owl:FunctionalProperty">
+          <h4 property="rdfs:label"><code>request-queue</code></h4>
+          <p property="rdfs:comment">The engine, which inherits the relation <code>tfo:queue</code>, also has a queue for <em>request</em> transforms.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Engine"><code>itcv:Engine</code></a></dd>
             <dt>Range:</dt>
             <dd><a rel="rdfs:range" href="/transformation#Queue"><code>tfo:Queue</code></a></dd>
           </dl>

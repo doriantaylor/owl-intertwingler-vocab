@@ -5,6 +5,7 @@
       xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
       xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
       xmlns:owl="http://www.w3.org/2002/07/owl#"
+      xmlns:sh="http://www.w3.org/ns/shacl#"
       xmlns:dct="http://purl.org/dc/terms/"
       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
       xmlns:bibo="http://purl.org/ontology/bibo/"
@@ -13,7 +14,7 @@
       xmlns:vann="http://purl.org/vocab/vann/"
       xmlns:tfo="https://vocab.methodandstructure.com/transformation#"
       xmlns:itcv="https://vocab.methodandstructure.com/intertwingler#"
-      prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dct: http://purl.org/dc/terms/ skos: http://www.w3.org/2004/02/skos/core# bibo: http://purl.org/ontology/bibo/ bs: http://purl.org/ontology/bibo/status/ foaf: http://xmlns.com/foaf/0.1/ vann: http://purl.org/vocab/vann/ tfo: https://vocab.methodandstructure.com/transformation# itcv: https://vocab.methodandstructure.com/intertwingler#"
+      prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# sh: http://www.w3.org/ns/shacl# dct: http://purl.org/dc/terms/ skos: http://www.w3.org/2004/02/skos/core# bibo: http://purl.org/ontology/bibo/ bs: http://purl.org/ontology/bibo/status/ foaf: http://xmlns.com/foaf/0.1/ vann: http://purl.org/vocab/vann/ tfo: https://vocab.methodandstructure.com/transformation# itcv: https://vocab.methodandstructure.com/intertwingler#"
       vocab="http://www.w3.org/1999/xhtml/vocab#"
       xml:lang="en">
   <head>
@@ -22,6 +23,7 @@
     <meta about="#" property="vann:preferredNamespacePrefix" content="itcv" datatype="xsd:token"/>
     <link about="#" rel="rdfs:isDefinedBy bibo:uri" href="#"/>
     <link rel="bibo:status" href="http://purl.org/ontology/bibo/status/draft"/>
+    <link rel="owl:imports" href="http://www.w3.org/ns/shacl#"/>
   </head>
   <body typeof="bibo:Specification">
     <div rel="foaf:primaryTopic" resource="#" typeof="owl:Ontology">
@@ -38,11 +40,12 @@
         <dd><code about="#" property="vann:preferredNamespacePrefix" datatype="xsd:token">itcv</code></dd>
       </dl>
       <p property="rdfs:comment dct:description">This document specifies the on-line configuration vocabulary for <a rel="dct:subject" href="https://intertwingler.net/">Intertwingler</a>, a <dfn>dense hypermedia</dfn> engine.</p>
+      <p>This ontology works in conjunction with the <a rel="owl:imports" href="/transformation#"><span property="dct:title">Transformation Functions Ontology</span></a> to organize handlers and transforms for <a rel="dct:subject" href="https://intertwingler.net/"><code>Intertwingler</code></a>.</p>
     </div>
     <section>
       <h2>Classes</h2>
       <figure>
-        <object data="intertwingler-classes.svg"><img src="intertwingler-classes" alt=""/></object>
+        <object type="image/svg+xml" data="intertwingler-classes.svg"><img src="intertwingler-classes" alt=""/></object>
       </figure>
       <section id="Handler" about="[itcv:Handler]" typeof="owl:Class">
         <h3 property="rdfs:label"><code>Handler</code></h3>
@@ -56,6 +59,7 @@
           -->
           <dt>Properties:</dt>
           <dd><a rev="rdfs:domain" href="#queue"><code>itcv:queue</code></a></dd>
+          <dd><a rev="rdfs:domain" href="#response-queue"><code>itcv:response-queue</code></a></dd>
         </dl>
         <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
       </section>
@@ -113,6 +117,32 @@
     </section>
     <section>
       <h2>Properties</h2>
+      <figure>
+        <object type="image/svg+xml" data="intertwingler-properties.svg"><img src="intertwingler-properties" alt=""/></object>
+      </figure>
+      <section>
+        <h3>Basic Configuration</h3>
+        <section id="serves" about="[itcv:serves]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>serves</code></h4>
+          <p property="rdfs:comment">This property denotes an authority (base <abbr>URI</abbr>) the engine is responsible for serving.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Engine"><code>itcv:Engine</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="prefix" about="[itcv:prefix]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>prefix</code></h4>
+          <p property="rdfs:comment">This is a prefix declaration borrowed from <abbr>SHACL</abbr>.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Engine"><code>itcv:Engine</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" resource="sh:PrefixDeclaration" href="https://www.w3.org/TR/shacl/#sparql-prefixes"><code>sh:PrefixDeclaration</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+      </section>
       <section>
         <h3>Bundling Handlers</h3>
         <section id="handler" about="[itcv:handler]" typeof="owl:ObjectProperty">
@@ -139,10 +169,11 @@
         </section>
       </section>
       <section>
-        <h3>Selecting Queues</h3>
-        <section id="queue" about="[itcv:queue]" typeof="owl:ObjectProperty owl:FunctionalProperty">
+        <h3>Selecting Transform Queues</h3>
+        <p></p>
+        <section id="queue" about="[itcv:queue]" typeof="owl:ObjectProperty">
           <h4 property="rdfs:label"><code>queue</code></h4>
-          <p property="rdfs:comment">The queue head is the entry point for the <dfn>transform</dfn> queue associated with the <code>itcv:Handler</code>,  or the default queue associated with the <code>itcv:Engine</code>. There should be exactly <em>one</em>.</p>
+          <p property="rdfs:comment">This property generically relates a transform queue to a handler without specifying what else to do with it.</p>
           <dl>
             <dt>Domain:</dt>
             <dd><a rel="rdfs:domain" href="#Handler"><code>itcv:Handler</code></a></dd>
@@ -155,8 +186,23 @@
           <h4 property="rdfs:label"><code>request-queue</code></h4>
           <p property="rdfs:comment">The engine, which inherits the relation <code>tfo:queue</code>, also has a queue for <em>request</em> transforms.</p>
           <dl>
+            <dt>Sub-property of:</dt>
+            <dd><a rel="rdfs:subPropertyOf" href="#queue"><code>itcv:queue</code></a></dd>
             <dt>Domain:</dt>
             <dd><a rel="rdfs:domain" href="#Engine"><code>itcv:Engine</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" href="/transformation#Queue"><code>tfo:Queue</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="response-queue" about="[itcv:response-queue]" typeof="owl:ObjectProperty owl:FunctionalProperty">
+          <h4 property="rdfs:label"><code>response-queue</code></h4>
+          <p property="rdfs:comment">This property denotes the entry point for the response <dfn>transform</dfn> queue associated with the <code>itcv:Handler</code>. It also specifies the default queue associated with the <code>itcv:Engine</code>.</p>
+          <dl>
+            <dt>Sub-property of:</dt>
+            <dd><a rel="rdfs:subPropertyOf" href="#queue"><code>itcv:queue</code></a></dd>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Handler"><code>itcv:Handler</code></a></dd>
             <dt>Range:</dt>
             <dd><a rel="rdfs:range" href="/transformation#Queue"><code>tfo:Queue</code></a></dd>
           </dl>

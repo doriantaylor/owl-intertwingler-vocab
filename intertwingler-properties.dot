@@ -1,0 +1,73 @@
+digraph {
+    graph [bgcolor=transparent,rankdir=TB];
+    node [shape=box,style=rounded,color="#000000",fontcolor="#000000",fontname="Lucida Grande, Lucida Sans Unicode, sans-serif"];
+    edge [concentrate=true,color="#000000",fontcolor="#000000",fontname="Lucida Grande, Lucida Sans Unicode, sans-serif"];
+
+    // third-party classes
+
+    subgraph {
+        node [shape=box, style=dashed];
+        rdfs_Resource [label="rdfs:Resource", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_resource"];
+        sh_PrefixDeclaration [label="sh:PrefixDeclaration", target="_parent", href="https://www.w3.org/TR/shacl/#sparql-prefixes"];
+        tfo_Queue [label="tfo:Queue", target="_parent", href="https://vocab.methodandstructure.com/transformation#Queue"];
+    }
+
+    // our classes
+
+    subgraph {
+        node [shape=box, style=""];
+        itcv_Handler [label="itcv:Handler", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Handler"];
+        itcv_Engine [label="itcv:Engine", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Engine"];
+        // itcv_Transform [label="itcv:Transform", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Transform"];
+        itcv_HandlerList [label="itcv:HandlerList", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#HandlerList"];
+    }
+
+    // third-party properties
+
+    subgraph {
+        node [style="dashed,rounded"];
+    }
+
+    // our properties
+
+    itcv_serves [label="itcv:serves", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#serves"];
+    itcv_prefix [label="itcv:prefix", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#prefix"];
+    itcv_handler [label="itcv:handler", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#handler"];
+    itcv_handler_list [label="itcv:handler-list", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#handler-list"];
+    itcv_queue [label="itcv:queue", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#queue"];
+    itcv_request_queue [label="itcv:request-queue", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#request-queue"];
+    itcv_response_queue [label="itcv:response-queue", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#response-queue"];
+
+    // relations
+
+    subgraph {
+        edge [style=dashed, label="rdfs:subPropertyOf"];
+        itcv_request_queue -> itcv_queue ;
+        itcv_response_queue -> itcv_queue ;
+    }
+
+    subgraph {
+        edge [style=dashed, dir=back, label="rdfs:domain"];
+        itcv_Handler -> itcv_queue;
+        itcv_Engine  -> itcv_request_queue;
+        itcv_Engine  -> itcv_response_queue;
+        itcv_Engine  -> itcv_serves;
+        itcv_Engine  -> itcv_prefix;
+
+        itcv_Engine  -> itcv_handler;
+        itcv_Engine  -> itcv_handler_list;
+    }
+
+    subgraph {
+        edge [style=dashed, label="rdfs:range"];
+        itcv_serves         -> rdfs_Resource;
+        itcv_prefix         -> sh_PrefixDeclaration;
+
+        itcv_queue          -> tfo_Queue;
+        itcv_request_queue  -> tfo_Queue;
+        itcv_response_queue -> tfo_Queue;
+
+        itcv_handler      -> itcv_Handler;
+        itcv_handler_list -> itcv_HandlerList;
+    }
+}

@@ -8,7 +8,9 @@ digraph {
 
     subgraph {
         node [style=dashed];
+        rdfs_Resource [label="rdfs:Resource", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_resource"];
         rdf_List [label="rdf:List", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_list"];
+        sh_PrefixDeclaration [label="sh:PrefixDeclaration", target="_parent", href="https://www.w3.org/TR/shacl/#sparql-prefixes"];
         tfo_Queue [label="tfo:Queue", target="_parent", href="https://vocab.methodandstructure.com/transformation#Queue"];
     }
 
@@ -31,8 +33,11 @@ digraph {
 
     // main relations
 
+    itcv_Engine  -> rdfs_Resource [label="itcv:serves"];
+    itcv_Engine  -> sh_PrefixDeclaration [label="itcv:prefix"];
     itcv_Engine  -> itcv_Handler [label="itcv:handler"];
     itcv_Engine  -> itcv_HandlerList [label="itcv:handler-list"];
     itcv_Engine  -> tfo_Queue [label="itcv:request-queue"];
+    itcv_Handler -> tfo_Queue [label="itcv:response-queue"];
     itcv_Handler -> tfo_Queue [label="itcv:queue"];
 }

@@ -18,6 +18,13 @@ This document specifies the on-line configuration vocabulary for
 <a href="https://intertwingler.net/" rel="dct:subject">Intertwingler</a>,
 a <span class="dfn">dense hypermedia</span> engine.
 
+This ontology works in conjunction with the
+<a href="https://vocab.methodandstructure.com/transformation#"
+rel="owl:imports"><span property="dct:title">Transformation Functions
+Ontology</span></a> to organize handlers and transforms for
+<a href="https://intertwingler.net/"
+rel="dct:subject"><code>Intertwingler</code></a>.
+
 </div>
 
 <div class="section">
@@ -38,6 +45,10 @@ more URIs via one or more HTTP request methods.
 Properties:  
 <a href="https://vocab.methodandstructure.com/intertwingler#queue"
 rev="rdfs:domain"><code>itcv:queue</code></a>
+
+<a
+href="https://vocab.methodandstructure.com/intertwingler#response-queue"
+rev="rdfs:domain"><code>itcv:response-queue</code></a>
 
 <a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
@@ -134,6 +145,51 @@ rel="rdf:rest" resource="rdf:nil">)</span></span> </span> </span>
 
 ## Properties
 
+![](https://vocab.methodandstructure.com/intertwingler-properties)
+
+<div class="section">
+
+### Basic Configuration
+
+<div id="serves" class="section" about="[itcv:serves]"
+typeof="owl:ObjectProperty">
+
+#### `serves`
+
+This property denotes an authority (base URI) the engine is responsible
+for serving.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Engine"
+rel="rdfs:domain"><code>itcv:Engine</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="prefix" class="section" about="[itcv:prefix]"
+typeof="owl:ObjectProperty">
+
+#### `prefix`
+
+This is a prefix declaration borrowed from SHACL.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Engine"
+rel="rdfs:domain"><code>itcv:Engine</code></a>
+
+Range:  
+<a href="https://www.w3.org/TR/shacl/#sparql-prefixes" rel="rdfs:range"
+resource="sh:PrefixDeclaration"><code>sh:PrefixDeclaration</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+</div>
+
 <div class="section">
 
 ### Bundling Handlers
@@ -182,17 +238,15 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 
 <div class="section">
 
-### Selecting Queues
+### Selecting Transform Queues
 
 <div id="queue" class="section" about="[itcv:queue]"
-typeof="owl:ObjectProperty owl:FunctionalProperty">
+typeof="owl:ObjectProperty">
 
 #### `queue`
 
-The queue head is the entry point for the <span
-class="dfn">transform</span> queue associated with the `itcv:Handler`,
-or the default queue associated with the `itcv:Engine`. There should be
-exactly *one*.
+This property generically relates a transform queue to a handler without
+specifying what else to do with it.
 
 Domain:  
 <a href="https://vocab.methodandstructure.com/intertwingler#Handler"
@@ -215,9 +269,39 @@ typeof="owl:ObjectProperty owl:FunctionalProperty">
 The engine, which inherits the relation `tfo:queue`, also has a queue
 for *request* transforms.
 
+Sub-property of:  
+<a href="https://vocab.methodandstructure.com/intertwingler#queue"
+rel="rdfs:subPropertyOf"><code>itcv:queue</code></a>
+
 Domain:  
 <a href="https://vocab.methodandstructure.com/intertwingler#Engine"
 rel="rdfs:domain"><code>itcv:Engine</code></a>
+
+Range:  
+<a href="https://vocab.methodandstructure.com/transformation#Queue"
+rel="rdfs:range"><code>tfo:Queue</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="response-queue" class="section" about="[itcv:response-queue]"
+typeof="owl:ObjectProperty owl:FunctionalProperty">
+
+#### `response-queue`
+
+This property denotes the entry point for the response <span
+class="dfn">transform</span> queue associated with the `itcv:Handler`.
+It also specifies the default queue associated with the `itcv:Engine`.
+
+Sub-property of:  
+<a href="https://vocab.methodandstructure.com/intertwingler#queue"
+rel="rdfs:subPropertyOf"><code>itcv:queue</code></a>
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Handler"
+rel="rdfs:domain"><code>itcv:Handler</code></a>
 
 Range:  
 <a href="https://vocab.methodandstructure.com/transformation#Queue"

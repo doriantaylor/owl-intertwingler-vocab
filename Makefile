@@ -12,7 +12,7 @@ target: variants readme dot
 
 variants:
 	$(RDF) serialize --input-format=rdfa --output-format=turtle -o $(ME).ttl $(ME).xml
-	$(RAPPER) -i turtle -o rdfxml $(ME).ttl > $(ME).rdf
+	$(RAPPER) -i turtle -o rdfxml-abbrev $(ME).ttl > $(ME).rdf
 
 $(wildcard $(ME)*.dot):
 	#	for i in $(ME)*.dot ; do $(DOT) -Tsvg -o `echo $$i | sed 's/dot$$/svg/'` $$i ; $(DOT) -Tpng -o `echo $$i | sed 's/dot$$/png/'` $$i ; done

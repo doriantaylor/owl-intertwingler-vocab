@@ -69,6 +69,9 @@ Subclass of:
 rel="rdfs:subClassOf"><code>itcv:Handler</code></a>
 
 Properties:  
+<a href="https://vocab.methodandstructure.com/intertwingler#resolver"
+rev="rdfs:domain"><code>itcv:resolver</code></a>
+
 <a href="https://vocab.methodandstructure.com/intertwingler#handler"
 rev="rdfs:domain"><code>itcv:handler</code></a>
 
@@ -104,6 +107,10 @@ Subclass of:
 <a href="https://vocab.methodandstructure.com/intertwingler#Handler"
 rel="rdfs:subClassOf"><code>itcv:Handler</code></a>
 
+See also:  
+<a href="https://vocab.methodandstructure.com/transformation#Transform"
+rel="rdfs:seeAlso"><code>tfo:Transform</code></a>
+
 <a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
 
@@ -137,6 +144,66 @@ resource="_:hv1">{<a href="https://www.w3.org/TR/rdf-schema/#ch_nil" rel="owl:ha
 resource="rdf:nil"><code>rdf:nil</code></a>}<span about="_:q2"
 rel="rdf:rest" resource="rdf:nil">)</span></span> </span> </span>
 
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="Resolver" class="section" about="[itcv:Resolver]"
+typeof="owl:Class">
+
+### `Resolver`
+
+An `itcv:Engine` has an `itcv:Resolver` for each website under its
+management. Resolvers map the dereferenceable—yet *perishable*—Web
+addresses to more durable identifiers like UUIDs and cryptographic
+hashes, as well as determine how to treat certain classes of resource,
+i.e., whether “sovereign” document or fragment thereof.
+
+Properties:  
+<a href="https://vocab.methodandstructure.com/intertwingler#manages"
+rev="rdfs:domain"><code>itcv:manages</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#prefix"
+rev="rdfs:domain"><code>itcv:prefix</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#document"
+rev="rdfs:domain"><code>itcv:document</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#fragment"
+rev="rdfs:domain"><code>itcv:fragment</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="FragmentSpecifier" class="section"
+about="[itcv:FragmentSpecifier]" typeof="owl:Class">
+
+### `FragmentSpecifier`
+
+A fragment specifier tells a resolver to treat a particular class of
+resource as a document *fragment*, rather than a full document, as well
+how to relate said fragment to a host document.
+
+Properties:  
+<a
+href="https://vocab.methodandstructure.com/intertwingler#fragment-class"
+rev="rdfs:domain"><code>itcv:fragment-class</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#host-class"
+rev="rdfs:domain"><code>itcv:host-class</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#via"
+rev="rdfs:domain"><code>itcv:via</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#supersedes"
+rev="rdfs:domain"><code>itcv:supersedes</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
 </div>
 
 </div>
@@ -149,19 +216,41 @@ rel="rdf:rest" resource="rdf:nil">)</span></span> </span> </span>
 
 <div class="section">
 
-### Basic Configuration
+### Describing Resolvers
 
-<div id="serves" class="section" about="[itcv:serves]"
+At the core of the `Intertwingler` engine is at least one resolver that
+maps
+
+<div id="resolver" class="section" about="[itcv:resolver]"
 typeof="owl:ObjectProperty">
 
-#### `serves`
+#### `resolver`
 
-This property denotes an authority (base URI) the engine is responsible
-for serving.
+This property maps the `itcv:Engine` to an `itcv:Resolver`.
 
 Domain:  
 <a href="https://vocab.methodandstructure.com/intertwingler#Engine"
 rel="rdfs:domain"><code>itcv:Engine</code></a>
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Resolver"
+rel="rdfs:domain"><code>itcv:Resolver</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="manages" class="section" about="[itcv:manages]"
+typeof="owl:ObjectProperty owl:FunctionalProperty">
+
+#### `manages`
+
+Denotes the base URI under management from this resolver.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Resolver"
+rel="rdfs:domain"><code>itcv:Resolver</code></a>
 
 <a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
@@ -176,8 +265,8 @@ typeof="owl:ObjectProperty">
 This is a prefix declaration borrowed from SHACL.
 
 Domain:  
-<a href="https://vocab.methodandstructure.com/intertwingler#Engine"
-rel="rdfs:domain"><code>itcv:Engine</code></a>
+<a href="https://vocab.methodandstructure.com/intertwingler#Resolver"
+rel="rdfs:domain"><code>itcv:Resolver</code></a>
 
 Range:  
 <a href="https://www.w3.org/TR/shacl/#sparql-prefixes" rel="rdfs:range"
@@ -188,11 +277,144 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>
 
+<div id="document" class="section" about="[itcv:document]"
+typeof="owl:ObjectProperty">
+
+#### `document`
+
+Denotes a class which is always to be treated as a stand-alone document.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Resolver"
+rel="rdfs:domain"><code>itcv:Resolver</code></a>
+
+Range:  
+<a href="https://www.w3.org/TR/rdf-schema/#ch_class" rel="rdfs:range"
+resource="rdfs:Class"><code>rdfs:Class</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="fragment" class="section" about="[itcv:fragment]"
+typeof="owl:ObjectProperty">
+
+#### `fragment`
+
+Denotes an `itcv:FragmentSpecifier` that describes how a given class is
+to be treated as a fragment of another document.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Resolver"
+rel="rdfs:domain"><code>itcv:Resolver</code></a>
+
+Range:  
+<a
+href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"
+rel="rdfs:range"><code>itcv:FragmentSpecifier</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="fragment-class" class="section" about="[itcv:fragment-class]"
+typeof="owl:ObjectProperty">
+
+#### `fragment-class`
+
+The target class of an `itcv:FragmentSpecifier`.
+
+Domain:  
+<a
+href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"
+rel="rdfs:domain"><code>itcv:FragmentSpecifier</code></a>
+
+Range:  
+<a href="https://www.w3.org/TR/rdf-schema/#ch_class" rel="rdfs:range"
+resource="rdfs:Class"><code>rdfs:Class</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="host-class" class="section" about="[itcv:host-class]"
+typeof="owl:ObjectProperty">
+
+#### `host-class`
+
+Specifies a class of host document.
+
+Domain:  
+<a
+href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"
+rel="rdfs:domain"><code>itcv:FragmentSpecifier</code></a>
+
+Range:  
+<a href="https://www.w3.org/TR/rdf-schema/#ch_class" rel="rdfs:range"
+resource="rdfs:Class"><code>rdfs:Class</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="via" class="section" about="[itcv:via]"
+typeof="owl:ObjectProperty">
+
+#### `via`
+
+Specifies the relationship between a fragment and its host document.
+
+Rather than type out a formal definition of the range of this property,
+note that it is intended to be the same range as a [SHACL property
+path](https://www.w3.org/TR/shacl/#property-paths) (the SHACL people
+didn't formally define this either).
+
+Domain:  
+<a
+href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"
+rel="rdfs:domain"><code>itcv:FragmentSpecifier</code></a>
+
+See also:  
+<a href="https://www.w3.org/TR/shacl/#property-paths"
+rel="rdfs:seeAlso">SHACL property paths</a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="supersedes" class="section" about="[itcv:supersedes]"
+typeof="owl:ObjectProperty">
+
+#### `supersedes`
+
+Identifies a fragment specifier over which the subject is intended to
+take precedence.
+
+Domain:  
+<a
+href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"
+rel="rdfs:domain"><code>itcv:FragmentSpecifier</code></a>
+
+Range:  
+<a
+href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"
+rel="rdfs:range"><code>itcv:FragmentSpecifier</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
 </div>
 
 <div class="section">
 
-### Bundling Handlers
+### Specifying Handlers
 
 <div id="handler" class="section" about="[itcv:handler]"
 typeof="owl:ObjectProperty">
@@ -266,7 +488,7 @@ typeof="owl:ObjectProperty owl:FunctionalProperty">
 
 #### `request-queue`
 
-The engine, which inherits the relation `tfo:queue`, also has a queue
+The engine, which inherits the relation `itcv:queue`, also has a queue
 for *request* transforms.
 
 Sub-property of:  
@@ -313,5 +535,20 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 </div>
 
 </div>
+
+</div>
+
+<div class="section">
+
+## References
+
+-   <a href="https://intertwingler.net/" about="#"
+    rel="foaf:primaryTopic">Intertwingler — Retrofitting the Web</a>
+-   <a href="https://github.com/doriantaylor/rb-intertwingler" about="#"
+    rel="dct:references">Intertwingler reference implementation</a>
+-   <a href="https://vocab.methodandstructure.com/transformation#" about="#"
+    rel="owl:imports">Transformation Functions Ontology</a>
+-   <a href="https://www.w3.org/TR/shacl/" about="#" rel="owl:imports"
+    resource="sh:">Shapes Constraint Language (SHACL)</a>
 
 </div>

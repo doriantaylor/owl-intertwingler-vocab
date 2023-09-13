@@ -8,6 +8,7 @@ digraph {
     subgraph {
         node [shape=box, style=dashed];
         rdfs_Resource [label="rdfs:Resource", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_resource"];
+        rdfs_Class [label="rdfs:Class", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_class"];
         sh_PrefixDeclaration [label="sh:PrefixDeclaration", target="_parent", href="https://www.w3.org/TR/shacl/#sparql-prefixes"];
         tfo_Queue [label="tfo:Queue", target="_parent", href="https://vocab.methodandstructure.com/transformation#Queue"];
     }
@@ -17,6 +18,8 @@ digraph {
     subgraph {
         node [shape=box, style=""];
         itcv_Handler [label="itcv:Handler", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Handler"];
+        itcv_Resolver [label="itcv:Resolver", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Resolver"];
+        itcv_FragmentSpecifier [label="itcv:FragmentSpecifier", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"];
         itcv_Engine [label="itcv:Engine", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Engine"];
         // itcv_Transform [label="itcv:Transform", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Transform"];
         itcv_HandlerList [label="itcv:HandlerList", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#HandlerList"];
@@ -30,8 +33,15 @@ digraph {
 
     // our properties
 
-    itcv_serves [label="itcv:serves", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#serves"];
+    itcv_resolver [label="itcv:resolver", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#resolver"];
+    itcv_manages [label="itcv:manages", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#manages"];
     itcv_prefix [label="itcv:prefix", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#prefix"];
+    itcv_document [label="itcv:document", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#document"];
+    itcv_fragment [label="itcv:fragment", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#fragment"];
+    itcv_fragment_class [label="itcv:fragment-class", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#fragment-class"];
+    itcv_host_class [label="itcv:host-class", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#host-class"];
+    itcv_via [label="itcv:via", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#via"];
+    itcv_supersedes [label="itcv:supersedes", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#supersedes"];
     itcv_handler [label="itcv:handler", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#handler"];
     itcv_handler_list [label="itcv:handler-list", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#handler-list"];
     itcv_queue [label="itcv:queue", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#queue"];
@@ -48,11 +58,19 @@ digraph {
 
     subgraph {
         edge [style=dashed, dir=back, label="rdfs:domain"];
-        itcv_Handler -> itcv_queue;
-        itcv_Engine  -> itcv_request_queue;
-        itcv_Engine  -> itcv_response_queue;
-        itcv_Engine  -> itcv_serves;
-        itcv_Engine  -> itcv_prefix;
+        itcv_Handler  -> itcv_queue;
+        itcv_Engine   -> itcv_request_queue;
+        itcv_Engine   -> itcv_response_queue;
+        itcv_Engine   -> itcv_resolver;
+        itcv_Resolver -> itcv_manages;
+        itcv_Resolver -> itcv_prefix;
+        itcv_Resolver -> itcv_document;
+        itcv_Resolver -> itcv_fragment;
+
+        itcv_FragmentSpecifier -> itcv_fragment_class;
+        itcv_FragmentSpecifier -> itcv_host_class;
+        itcv_FragmentSpecifier -> itcv_via;
+        itcv_FragmentSpecifier -> itcv_supersedes;
 
         itcv_Engine  -> itcv_handler;
         itcv_Engine  -> itcv_handler_list;
@@ -60,8 +78,15 @@ digraph {
 
     subgraph {
         edge [style=dashed, label="rdfs:range"];
-        itcv_serves         -> rdfs_Resource;
+        itcv_resolver       -> itcv_Resolver;
+        itcv_manages        -> rdfs_Resource;
         itcv_prefix         -> sh_PrefixDeclaration;
+        itcv_document       -> rdfs_Class;
+        itcv_fragment       -> itcv_FragmentSpecifier;
+        itcv_fragment_class -> rdfs_Class;
+        itcv_host_class     -> rdfs_Class;
+        itcv_via            -> rdfs_Resource;
+        itcv_supersedes     -> itcv_FragmentSpecifier;
 
         itcv_queue          -> tfo_Queue;
         itcv_request_queue  -> tfo_Queue;

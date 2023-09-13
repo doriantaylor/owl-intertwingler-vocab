@@ -23,7 +23,6 @@
     <meta about="#" property="vann:preferredNamespacePrefix" content="itcv" datatype="xsd:token"/>
     <link about="#" rel="rdfs:isDefinedBy bibo:uri" href="#"/>
     <link rel="bibo:status" href="http://purl.org/ontology/bibo/status/draft"/>
-    <link rel="owl:imports" href="http://www.w3.org/ns/shacl#"/>
   </head>
   <body typeof="bibo:Specification">
     <div rel="foaf:primaryTopic" resource="#" typeof="owl:Ontology">
@@ -70,6 +69,7 @@
           <dt>Subclass of:</dt>
           <dd><a rel="rdfs:subClassOf" href="#Handler"><code>itcv:Handler</code></a></dd>
           <dt>Properties:</dt>
+          <dd><a rev="rdfs:domain" href="#resolver"><code>itcv:resolver</code></a></dd>
           <dd><a rev="rdfs:domain" href="#handler"><code>itcv:handler</code></a></dd>
           <dd><a rev="rdfs:domain" href="#handler-list"><code>itcv:handler-list</code></a></dd>
           <dd><a rev="rdfs:domain" href="#request-queue"><code>itcv:request-queue</code></a></dd>
@@ -85,6 +85,8 @@
         <dl>
           <dt>Subclass of:</dt>
           <dd><a rel="rdfs:subClassOf" href="#Handler"><code>itcv:Handler</code></a></dd>
+          <dt>See also:</dt>
+          <dd><a rel="rdfs:seeAlso" href="/transformation#Transform"><code>tfo:Transform</code></a></dd>
           <!--
               <dt>Properties:</dt>
               <dd><a rev="rdfs:domain" href="#initial"><code>initial</code></a></dd>
@@ -113,6 +115,31 @@
             </span>
           </dd>
         </dl>
+        <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+      </section>
+      <section id="Resolver" about="[itcv:Resolver]" typeof="owl:Class">
+        <h3 property="rdfs:label"><code>Resolver</code></h3>
+        <p property="rdfs:comment">An <code>itcv:Engine</code> has an <code>itcv:Resolver</code> for each website under its management. Resolvers map the dereferenceable&#x2014;yet <em>perishable</em>&#x2014;Web addresses to more durable identifiers like UUIDs and cryptographic hashes, as well as determine how to treat certain classes of resource, i.e., whether <q>sovereign</q> document or fragment thereof.</p>
+        <dl>
+          <dt>Properties:</dt>
+          <dd><a rev="rdfs:domain" href="#manages"><code>itcv:manages</code></a></dd>
+          <dd><a rev="rdfs:domain" href="#prefix"><code>itcv:prefix</code></a></dd>
+          <dd><a rev="rdfs:domain" href="#document"><code>itcv:document</code></a></dd>
+          <dd><a rev="rdfs:domain" href="#fragment"><code>itcv:fragment</code></a></dd>
+        </dl>
+        <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+      </section>
+      <section id="FragmentSpecifier" about="[itcv:FragmentSpecifier]" typeof="owl:Class">
+        <h3 property="rdfs:label"><code>FragmentSpecifier</code></h3>
+        <p property="rdfs:comment">A fragment specifier tells a resolver to treat a particular class of resource as a document <em>fragment</em>, rather than a full document, as well how to relate said fragment to a host document.</p>
+        <dl>
+          <dt>Properties:</dt>
+          <dd><a rev="rdfs:domain" href="#fragment-class"><code>itcv:fragment-class</code></a></dd>
+          <dd><a rev="rdfs:domain" href="#host-class"><code>itcv:host-class</code></a></dd>
+          <dd><a rev="rdfs:domain" href="#via"><code>itcv:via</code></a></dd>
+          <dd><a rev="rdfs:domain" href="#supersedes"><code>itcv:supersedes</code></a></dd>
+        </dl>
+        <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
       </section>
     </section>
     <section>
@@ -121,13 +148,25 @@
         <object type="image/svg+xml" data="intertwingler-properties.svg"><img src="intertwingler-properties" alt=""/></object>
       </figure>
       <section>
-        <h3>Basic Configuration</h3>
-        <section id="serves" about="[itcv:serves]" typeof="owl:ObjectProperty">
-          <h4 property="rdfs:label"><code>serves</code></h4>
-          <p property="rdfs:comment">This property denotes an authority (base <abbr>URI</abbr>) the engine is responsible for serving.</p>
+        <h3>Describing Resolvers</h3>
+        <p>At the core of the <code>Intertwingler</code> engine is at least one resolver that maps </p>
+        <section id="resolver" about="[itcv:resolver]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>resolver</code></h4>
+          <p property="rdfs:comment">This property maps the <code>itcv:Engine</code> to an <code>itcv:Resolver</code>.</p>
           <dl>
             <dt>Domain:</dt>
             <dd><a rel="rdfs:domain" href="#Engine"><code>itcv:Engine</code></a></dd>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Resolver"><code>itcv:Resolver</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="manages" about="[itcv:manages]" typeof="owl:ObjectProperty owl:FunctionalProperty">
+          <h4 property="rdfs:label"><code>manages</code></h4>
+          <p property="rdfs:comment">Denotes the base <abbr>URI</abbr> under management from this resolver.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Resolver"><code>itcv:Resolver</code></a></dd>
           </dl>
           <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
         </section>
@@ -136,15 +175,84 @@
           <p property="rdfs:comment">This is a prefix declaration borrowed from <abbr>SHACL</abbr>.</p>
           <dl>
             <dt>Domain:</dt>
-            <dd><a rel="rdfs:domain" href="#Engine"><code>itcv:Engine</code></a></dd>
+            <dd><a rel="rdfs:domain" href="#Resolver"><code>itcv:Resolver</code></a></dd>
             <dt>Range:</dt>
             <dd><a rel="rdfs:range" resource="sh:PrefixDeclaration" href="https://www.w3.org/TR/shacl/#sparql-prefixes"><code>sh:PrefixDeclaration</code></a></dd>
           </dl>
           <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
         </section>
+        <section id="document" about="[itcv:document]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>document</code></h4>
+          <p property="rdfs:comment">Denotes a class which is always to be treated as a stand-alone document.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Resolver"><code>itcv:Resolver</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" resource="rdfs:Class" href="https://www.w3.org/TR/rdf-schema/#ch_class"><code>rdfs:Class</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="fragment" about="[itcv:fragment]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>fragment</code></h4>
+          <p property="rdfs:comment">Denotes an <code>itcv:FragmentSpecifier</code> that describes how a given class is to be treated as a fragment of another document.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Resolver"><code>itcv:Resolver</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" href="#FragmentSpecifier"><code>itcv:FragmentSpecifier</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="fragment-class" about="[itcv:fragment-class]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>fragment-class</code></h4>
+          <p property="rdfs:comment">The target class of an <code>itcv:FragmentSpecifier</code>.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#FragmentSpecifier"><code>itcv:FragmentSpecifier</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" resource="rdfs:Class" href="https://www.w3.org/TR/rdf-schema/#ch_class"><code>rdfs:Class</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="host-class" about="[itcv:host-class]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>host-class</code></h4>
+          <p property="rdfs:comment">Specifies a class of host document.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#FragmentSpecifier"><code>itcv:FragmentSpecifier</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" resource="rdfs:Class" href="https://www.w3.org/TR/rdf-schema/#ch_class"><code>rdfs:Class</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="via" about="[itcv:via]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>via</code></h4>
+          <p property="rdfs:comment">Specifies the relationship between a fragment and its host document.</p>
+          <aside role="note">
+            <p property="skos:note">Rather than type out a formal definition of the range of this property, note that it is intended to be the same range as a <a href="https://www.w3.org/TR/shacl/#property-paths"><abbr>SHACL</abbr> property path</a> (the <abbr>SHACL</abbr> people didn't formally define this either).</p>
+          </aside>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#FragmentSpecifier"><code>itcv:FragmentSpecifier</code></a></dd>
+            <dt>See also:</dt>
+            <dd><a rel="rdfs:seeAlso" href="https://www.w3.org/TR/shacl/#property-paths"><abbr>SHACL</abbr> property paths</a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="supersedes" about="[itcv:supersedes]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>supersedes</code></h4>
+          <p property="rdfs:comment">Identifies a fragment specifier over which the subject is intended to take precedence.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#FragmentSpecifier"><code>itcv:FragmentSpecifier</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" href="#FragmentSpecifier"><code>itcv:FragmentSpecifier</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
       </section>
       <section>
-        <h3>Bundling Handlers</h3>
+        <h3>Specifying Handlers</h3>
         <section id="handler" about="[itcv:handler]" typeof="owl:ObjectProperty">
           <h4 property="rdfs:label"><code>handler</code></h4>
           <p property="rdfs:comment">This property relates a handler to the engine.</p>
@@ -184,7 +292,7 @@
         </section>
         <section id="request-queue" about="[itcv:request-queue]" typeof="owl:ObjectProperty owl:FunctionalProperty">
           <h4 property="rdfs:label"><code>request-queue</code></h4>
-          <p property="rdfs:comment">The engine, which inherits the relation <code>tfo:queue</code>, also has a queue for <em>request</em> transforms.</p>
+          <p property="rdfs:comment">The engine, which inherits the relation <code>itcv:queue</code>, also has a queue for <em>request</em> transforms.</p>
           <dl>
             <dt>Sub-property of:</dt>
             <dd><a rel="rdfs:subPropertyOf" href="#queue"><code>itcv:queue</code></a></dd>
@@ -210,11 +318,14 @@
         </section>
       </section>
     </section>
-    <!--
-        <section>
-        <h2>References</h2>
-        <ul>
-        </ul>
-        </section>-->
+    <section>
+      <h2>References</h2>
+      <ul>
+        <li><a about="#" rel="foaf:primaryTopic" href="https://intertwingler.net/">Intertwingler &#x2014; Retrofitting the Web</a></li>
+        <li><a about="#" rel="dct:references" href="https://github.com/doriantaylor/rb-intertwingler">Intertwingler reference implementation</a></li>
+        <li><a about="#" rel="owl:imports" href="/transformation#">Transformation Functions Ontology</a></li>
+        <li><a about="#" rel="owl:imports" resource="sh:" href="https://www.w3.org/TR/shacl/">Shapes Constraint Language (<abbr>SHACL</abbr>)</a></li>
+      </ul>
+    </section>
   </body>
 </html>

@@ -9,6 +9,7 @@ digraph {
     subgraph {
         node [style=dashed];
         rdfs_Resource [label="rdfs:Resource", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_resource"];
+        rdfs_Class [label="rdfs:Class", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_class"];
         rdf_List [label="rdf:List", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_list"];
         sh_PrefixDeclaration [label="sh:PrefixDeclaration", target="_parent", href="https://www.w3.org/TR/shacl/#sparql-prefixes"];
         tfo_Queue [label="tfo:Queue", target="_parent", href="https://vocab.methodandstructure.com/transformation#Queue"];
@@ -17,6 +18,8 @@ digraph {
     // our classes
 
     itcv_Handler [label="itcv:Handler", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Handler"];
+    itcv_Resolver [label="itcv:Resolver", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Resolver"];
+    itcv_FragmentSpecifier [label="itcv:FragmentSpecifier", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"];
     itcv_Engine [label="itcv:Engine", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Engine"];
     itcv_Transform [label="itcv:Transform", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Transform"];
     itcv_HandlerList [label="itcv:HandlerList", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#HandlerList"];
@@ -26,18 +29,25 @@ digraph {
     subgraph {
         edge [style=dashed, label="rdfs:subClassOf"];
 
-        itcv_Engine    -> itcv_Handler;
-        itcv_Transform -> itcv_Handler;
+        itcv_Engine      -> itcv_Handler;
+        itcv_Transform   -> itcv_Handler;
         itcv_HandlerList -> rdf_List;
     }
 
     // main relations
 
-    itcv_Engine  -> rdfs_Resource [label="itcv:serves"];
-    itcv_Engine  -> sh_PrefixDeclaration [label="itcv:prefix"];
-    itcv_Engine  -> itcv_Handler [label="itcv:handler"];
-    itcv_Engine  -> itcv_HandlerList [label="itcv:handler-list"];
-    itcv_Engine  -> tfo_Queue [label="itcv:request-queue"];
-    itcv_Handler -> tfo_Queue [label="itcv:response-queue"];
-    itcv_Handler -> tfo_Queue [label="itcv:queue"];
+    itcv_Resolver          -> rdfs_Resource [label="itcv:manages"];
+    itcv_Resolver          -> sh_PrefixDeclaration [label="itcv:prefix"];
+    itcv_Resolver          -> rdfs_Class [label="itcv:document"];
+    itcv_Resolver          -> itcv_FragmentSpecifier [label="itcv:fragment"];
+    itcv_FragmentSpecifier -> rdfs_Class [label="itcv:fragment-class"];
+    itcv_FragmentSpecifier -> rdfs_Class [label="itcv:host-class"];
+    itcv_FragmentSpecifier -> rdfs_Resource [label="itcv:via"];
+    itcv_FragmentSpecifier -> itcv_FragmentSpecifier [label="itcv:supersedes"];
+    itcv_Engine            -> itcv_Resolver [label="itcv:resolver"];
+    itcv_Engine            -> itcv_Handler [label="itcv:handler"];
+    itcv_Engine            -> itcv_HandlerList [label="itcv:handler-list"];
+    itcv_Engine            -> tfo_Queue [label="itcv:request-queue"];
+    itcv_Handler           -> tfo_Queue [label="itcv:response-queue"];
+    itcv_Handler           -> tfo_Queue [label="itcv:queue"];
 }

@@ -8,6 +8,8 @@ Taylor</span></a>
 Created  
 September 6, 2023
 
+October 9, 2023
+
 Namespace URI  
 [`https://vocab.methodandstructure.com/intertwingler#`](https://vocab.methodandstructure.com/intertwingler#)
 
@@ -41,6 +43,10 @@ typeof="owl:Class">
 An `itcv:Handler` is the basic unit of functionality in Intertwingler.
 Handlers are <span class="dfn">microservices</span> that serve one or
 more URIs via one or more HTTP request methods.
+
+Subclass of:  
+<a href="https://vocab.methodandstructure.com/transformation#Bundle"
+rel="rdfs:subClassOf"><code>tfo:Bundle</code></a>
 
 Properties:  
 <a href="https://vocab.methodandstructure.com/intertwingler#queue"
@@ -219,7 +225,9 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 ### Describing Resolvers
 
 At the core of the `Intertwingler` engine is at least one resolver that
-maps
+maps HTTP(S) URIs to more durable underlying identifiers. The resolver
+also manages prefix mappings for namespaces, as well as a mapping of RDF
+classes to entire documents versus fragment identifiers.
 
 <div id="resolver" class="section" about="[itcv:resolver]"
 typeof="owl:ObjectProperty">
@@ -257,6 +265,23 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>
 
+<div id="alias" class="section" about="[itcv:alias]"
+typeof="owl:ObjectProperty owl:FunctionalProperty">
+
+#### `alias`
+
+Denotes, ultimately, an HTTP `Host:` header that is an acceptable
+substitute for the authority under management.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Resolver"
+rel="rdfs:domain"><code>itcv:Resolver</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
 <div id="prefix" class="section" about="[itcv:prefix]"
 typeof="owl:ObjectProperty">
 
@@ -271,6 +296,26 @@ rel="rdfs:domain"><code>itcv:Resolver</code></a>
 Range:  
 <a href="https://www.w3.org/TR/shacl/#sparql-prefixes" rel="rdfs:range"
 resource="sh:PrefixDeclaration"><code>sh:PrefixDeclaration</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="vocab" class="section" about="[itcv:vocab]"
+typeof="owl:DatatypeProperty owl:FunctionalProperty">
+
+#### `vocab`
+
+Defines the null prefix vocabulary, e.g. for use with RDFa.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Resolver"
+rel="rdfs:domain"><code>itcv:Resolver</code></a>
+
+Range:  
+<a href="https://www.w3.org/TR/xmlschema-2/#anyURI" rel="rdfs:range"
+resource="xsd:anyURI"><code>xsd:anyURI</code></a>
 
 <a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>

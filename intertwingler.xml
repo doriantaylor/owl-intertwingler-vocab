@@ -8,13 +8,15 @@
       xmlns:sh="http://www.w3.org/ns/shacl#"
       xmlns:dct="http://purl.org/dc/terms/"
       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+      xmlns:prov="http://www.w3.org/ns/prov#"
+      xmlns:dcat="http://www.w3.org/ns/dcat#"
       xmlns:bibo="http://purl.org/ontology/bibo/"
       xmlns:bs="http://purl.org/ontology/bibo/status/"
       xmlns:foaf="http://xmlns.com/foaf/0.1/"
       xmlns:vann="http://purl.org/vocab/vann/"
       xmlns:tfo="https://vocab.methodandstructure.com/transformation#"
       xmlns:itcv="https://vocab.methodandstructure.com/intertwingler#"
-      prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# sh: http://www.w3.org/ns/shacl# dct: http://purl.org/dc/terms/ skos: http://www.w3.org/2004/02/skos/core# bibo: http://purl.org/ontology/bibo/ bs: http://purl.org/ontology/bibo/status/ foaf: http://xmlns.com/foaf/0.1/ vann: http://purl.org/vocab/vann/ tfo: https://vocab.methodandstructure.com/transformation# itcv: https://vocab.methodandstructure.com/intertwingler#"
+      prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# sh: http://www.w3.org/ns/shacl# dct: http://purl.org/dc/terms/ skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# dcat: http://www.w3.org/ns/dcat# bibo: http://purl.org/ontology/bibo/ bs: http://purl.org/ontology/bibo/status/ foaf: http://xmlns.com/foaf/0.1/ vann: http://purl.org/vocab/vann/ tfo: https://vocab.methodandstructure.com/transformation# itcv: https://vocab.methodandstructure.com/intertwingler#"
       vocab="http://www.w3.org/1999/xhtml/vocab#"
       xml:lang="en">
   <head>
@@ -31,6 +33,7 @@
         <dd><a rel="dct:creator" href="http://doriantaylor.com/person/dorian-taylor#me" typeof="foaf:Person"><span property="foaf:name">Dorian Taylor</span></a></dd>
         <dt>Created</dt>
         <dd property="dct:created" datatype="xsd:dateTime" content="2023-09-06T21:14:10Z">September 6, 2023</dd>
+        <dd property="dct:modified" datatype="xsd:dateTime" content="2023-10-09T19:04:07Z">October 9, 2023</dd>
         <!--<dt>Updated</dt>
             <dd property="2012-12-12T16:04:50-0800">December 12, 2012</dd>-->
         <dt>Namespace URI</dt>
@@ -50,12 +53,8 @@
         <h3 property="rdfs:label"><code>Handler</code></h3>
         <p property="rdfs:comment">An <code>itcv:Handler</code> is the basic unit of functionality in Intertwingler. Handlers are <dfn>microservices</dfn> that serve one or more <abbr>URIs</abbr> via one or more <abbr>HTTP</abbr> request methods.</p>
         <dl>
-          <!--<dt>Subclass of:</dt>
-              <dd><a rel="external rdfs:subClassOf" href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a></dd>
-              <dt>Disjoint with:</dt>
-              <dd><a rel="owl:disjointWith" href="#Position">ibis:Position</a></dd>
-              <dd><a rel="owl:disjointWith" href="#Argument">ibis:Argument</a></dd>
-          -->
+          <dt>Subclass of:</dt>
+          <dd><a rel="rdfs:subClassOf" href="transformation#Bundle"><code>tfo:Bundle</code></a></dd>
           <dt>Properties:</dt>
           <dd><a rev="rdfs:domain" href="#queue"><code>itcv:queue</code></a></dd>
           <dd><a rev="rdfs:domain" href="#response-queue"><code>itcv:response-queue</code></a></dd>
@@ -149,7 +148,7 @@
       </figure>
       <section>
         <h3>Describing Resolvers</h3>
-        <p>At the core of the <code>Intertwingler</code> engine is at least one resolver that maps </p>
+        <p>At the core of the <code>Intertwingler</code> engine is at least one resolver that maps <abbr><abbr>HTTP</abbr>(S)</abbr> <abbr>URIs</abbr> to more durable underlying identifiers. The resolver also manages prefix mappings for namespaces, as well as a mapping of <abbr>RDF</abbr> classes to entire documents versus fragment identifiers.</p>
         <section id="resolver" about="[itcv:resolver]" typeof="owl:ObjectProperty">
           <h4 property="rdfs:label"><code>resolver</code></h4>
           <p property="rdfs:comment">This property maps the <code>itcv:Engine</code> to an <code>itcv:Resolver</code>.</p>
@@ -170,6 +169,15 @@
           </dl>
           <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
         </section>
+        <section id="alias" about="[itcv:alias]" typeof="owl:ObjectProperty owl:FunctionalProperty">
+          <h4 property="rdfs:label"><code>alias</code></h4>
+          <p property="rdfs:comment">Denotes, ultimately, an <abbr>HTTP</abbr> <code>Host:</code> header that is an acceptable substitute for the authority under management.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Resolver"><code>itcv:Resolver</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
         <section id="prefix" about="[itcv:prefix]" typeof="owl:ObjectProperty">
           <h4 property="rdfs:label"><code>prefix</code></h4>
           <p property="rdfs:comment">This is a prefix declaration borrowed from <abbr>SHACL</abbr>.</p>
@@ -178,6 +186,17 @@
             <dd><a rel="rdfs:domain" href="#Resolver"><code>itcv:Resolver</code></a></dd>
             <dt>Range:</dt>
             <dd><a rel="rdfs:range" resource="sh:PrefixDeclaration" href="https://www.w3.org/TR/shacl/#sparql-prefixes"><code>sh:PrefixDeclaration</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
+        <section id="vocab" about="[itcv:vocab]" typeof="owl:DatatypeProperty owl:FunctionalProperty">
+          <h4 property="rdfs:label"><code>vocab</code></h4>
+          <p property="rdfs:comment">Defines the null prefix vocabulary, e.g. for use with <abbr>RDFa</abbr>.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Resolver"><code>itcv:Resolver</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" resource="xsd:anyURI" href="https://www.w3.org/TR/xmlschema-2/#anyURI"><code>xsd:anyURI</code></a></dd>
           </dl>
           <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
         </section>

@@ -12,6 +12,7 @@ digraph {
         rdfs_Class [label="rdfs:Class", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_class"];
         rdf_List [label="rdf:List", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_list"];
         sh_PrefixDeclaration [label="sh:PrefixDeclaration", target="_parent", href="https://www.w3.org/TR/shacl/#sparql-prefixes"];
+        tfo_Bundle [label="tfo:Bundle", target="_parent", href="https://vocab.methodandstructure.com/transformation#Bundle"];
         tfo_Queue [label="tfo:Queue", target="_parent", href="https://vocab.methodandstructure.com/transformation#Queue"];
     }
 
@@ -29,7 +30,7 @@ digraph {
     subgraph {
         edge [style=dashed, label="rdfs:subClassOf"];
 
-        itcv_Engine      -> itcv_Handler;
+        itcv_Engine      -> itcv_Handler -> tfo_Bundle;
         itcv_Transform   -> itcv_Handler;
         itcv_HandlerList -> rdf_List;
     }

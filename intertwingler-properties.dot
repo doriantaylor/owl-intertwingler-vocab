@@ -10,6 +10,7 @@ digraph {
         rdfs_Resource [label="rdfs:Resource", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_resource"];
         rdfs_Class [label="rdfs:Class", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_class"];
         sh_PrefixDeclaration [label="sh:PrefixDeclaration", target="_parent", href="https://www.w3.org/TR/shacl/#sparql-prefixes"];
+        // tfo_Bundle [label="tfo:Bundle", target="_parent", href="https://vocab.methodandstructure.com/transformation#Bundle"];
         tfo_Queue [label="tfo:Queue", target="_parent", href="https://vocab.methodandstructure.com/transformation#Queue"];
     }
 
@@ -52,8 +53,8 @@ digraph {
 
     subgraph {
         edge [style=dashed, label="rdfs:subPropertyOf"];
-        itcv_request_queue -> itcv_queue ;
-        itcv_response_queue -> itcv_queue ;
+        itcv_request_queue  -> itcv_queue;
+        itcv_response_queue -> itcv_queue;
     }
 
     subgraph {

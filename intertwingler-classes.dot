@@ -20,6 +20,7 @@ digraph {
 
     itcv_Handler [label="itcv:Handler", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Handler"];
     itcv_Resolver [label="itcv:Resolver", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Resolver"];
+    itcv_FragmentList [label="itcv:FragmentList", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#FragmentList"];
     itcv_FragmentSpecifier [label="itcv:FragmentSpecifier", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"];
     itcv_Engine [label="itcv:Engine", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Engine"];
     itcv_Transform [label="itcv:Transform", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Transform"];
@@ -30,9 +31,23 @@ digraph {
     subgraph {
         edge [style=dashed, label="rdfs:subClassOf"];
 
-        itcv_Engine      -> itcv_Handler -> tfo_Bundle;
-        itcv_Transform   -> itcv_Handler;
-        itcv_HandlerList -> rdf_List;
+        itcv_Engine       -> itcv_Handler -> tfo_Bundle;
+        itcv_Transform    -> itcv_Handler;
+        itcv_HandlerList  -> rdf_List;
+        itcv_FragmentList -> rdf_List;
+    }
+
+    // other third-party relations
+
+    subgraph {
+        edge [style=dashed, label="rdf:first"];
+        itcv_HandlerList -> itcv_Handler;
+        itcv_FragmentList -> itcv_FragmentSpecifier;
+    }
+    subgraph {
+        edge [style=dashed, label="rdf:rest"];
+        itcv_HandlerList -> itcv_HandlerList;
+        itcv_FragmentList -> itcv_FragmentList;
     }
 
     // main relations
@@ -41,6 +56,7 @@ digraph {
     itcv_Resolver          -> sh_PrefixDeclaration [label="itcv:prefix"];
     itcv_Resolver          -> rdfs_Class [label="itcv:document"];
     itcv_Resolver          -> itcv_FragmentSpecifier [label="itcv:fragment"];
+    itcv_Resolver          -> itcv_FragmentList [label="itcv:fragment-list"];
     itcv_FragmentSpecifier -> rdfs_Class [label="itcv:fragment-class"];
     itcv_FragmentSpecifier -> rdfs_Class [label="itcv:host-class"];
     itcv_FragmentSpecifier -> rdfs_Resource [label="itcv:via"];

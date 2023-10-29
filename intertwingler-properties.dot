@@ -1,3 +1,4 @@
+
 digraph {
     graph [bgcolor=transparent,rankdir=TB];
     node [shape=box,style=rounded,color="#000000",fontcolor="#000000",fontname="Lucida Grande, Lucida Sans Unicode, sans-serif"];
@@ -21,6 +22,7 @@ digraph {
         itcv_Handler [label="itcv:Handler", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Handler"];
         itcv_Resolver [label="itcv:Resolver", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Resolver"];
         itcv_FragmentSpecifier [label="itcv:FragmentSpecifier", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"];
+        itcv_FragmentList [label="itcv:FragmentList", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#FragmentList"];
         itcv_Engine [label="itcv:Engine", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Engine"];
         // itcv_Transform [label="itcv:Transform", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#Transform"];
         itcv_HandlerList [label="itcv:HandlerList", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#HandlerList"];
@@ -30,6 +32,8 @@ digraph {
 
     subgraph {
         node [style="dashed,rounded"];
+        // rdf_first [label="rdf:first", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_first"];
+        // rdf_rest [label="rdf:rest", target="_parent", href="https://www.w3.org/TR/rdf-schema/#ch_rest"];
     }
 
     // our properties
@@ -39,6 +43,7 @@ digraph {
     itcv_prefix [label="itcv:prefix", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#prefix"];
     itcv_document [label="itcv:document", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#document"];
     itcv_fragment [label="itcv:fragment", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#fragment"];
+    itcv_fragment_list [label="itcv:fragment-list", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#fragment-list"];
     itcv_fragment_class [label="itcv:fragment-class", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#fragment-class"];
     itcv_host_class [label="itcv:host-class", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#host-class"];
     itcv_via [label="itcv:via", target="_parent", href="https://vocab.methodandstructure.com/intertwingler#via"];
@@ -67,6 +72,7 @@ digraph {
         itcv_Resolver -> itcv_prefix;
         itcv_Resolver -> itcv_document;
         itcv_Resolver -> itcv_fragment;
+        itcv_Resolver -> itcv_fragment_list;
 
         itcv_FragmentSpecifier -> itcv_fragment_class;
         itcv_FragmentSpecifier -> itcv_host_class;
@@ -84,6 +90,7 @@ digraph {
         itcv_prefix         -> sh_PrefixDeclaration;
         itcv_document       -> rdfs_Class;
         itcv_fragment       -> itcv_FragmentSpecifier;
+        itcv_fragment_list  -> itcv_FragmentList;
         itcv_fragment_class -> rdfs_Class;
         itcv_host_class     -> rdfs_Class;
         itcv_via            -> rdfs_Resource;

@@ -34,6 +34,7 @@
         <dt>Created</dt>
         <dd property="dct:created" datatype="xsd:dateTime" content="2023-09-06T21:14:10Z">September 6, 2023</dd>
         <dd property="dct:modified" datatype="xsd:dateTime" content="2023-10-09T19:04:07Z">October 9, 2023</dd>
+        <dd property="dct:modified" datatype="xsd:dateTime" content="2023-10-29T19:43:48Z">October 29, 2023</dd>
         <!--<dt>Updated</dt>
             <dd property="2012-12-12T16:04:50-0800">December 12, 2012</dd>-->
         <dt>Namespace URI</dt>
@@ -125,6 +126,24 @@
           <dd><a rev="rdfs:domain" href="#prefix"><code>itcv:prefix</code></a></dd>
           <dd><a rev="rdfs:domain" href="#document"><code>itcv:document</code></a></dd>
           <dd><a rev="rdfs:domain" href="#fragment"><code>itcv:fragment</code></a></dd>
+        </dl>
+        <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+      </section>
+      <section id="FragmentList" about="[itcv:FragmentList]" typeof="owl:Class">
+        <h3 property="rdfs:label"><code>FragmentList</code></h3>
+        <p property="rdfs:comment">An <code>itcv:FragmentList</code> is a list of fragments and only fragments.</p>
+        <dl>
+          <dt>Subclass of:</dt>
+          <dd><a rel="rdfs:subClassOf" resource="rdf:List" href="https://www.w3.org/TR/rdf-schema/#ch_list"><code>rdf:List</code></a></dd>
+          <dt>Property restrictions:</dt>
+          <dd rel="rdfs:subClassOf" resource="_:Ek2vMqhczAS47dDps8jMHK">
+            <a rel="owl:onProperty" resource="rdf:rest" href="https://www.w3.org/TR/rdf-schema/#ch_rest"><code>rdf:rest</code></a> &#x2208;
+            <span rel="owl:allValuesFrom" resource="_:EDH1Pu2CLR0UcP3ruqS0WJ">
+              <span rel="owl:unionOf" resource="_:EFNairIJBEcuyeqMUhxNSI">(<a rel="rdf:first" href="#FragmentList"><code>itcv:FragmentList</code></a> <span about="_:EFNairIJBEcuyeqMUhxNSI" rel="rdf:rest" resource="_:EcsJIlAboV0u-cVjx_cxSK">&#x222a;</span>
+              <span about="_:EcsJIlAboV0u-cVjx_cxSK" rel="rdf:first" resource="_:EokiswwNRR4Nqyww5XrRsL">{<a rel="owl:hasValue" resource="rdf:nil" href="https://www.w3.org/TR/rdf-schema/#ch_nil"><code>rdf:nil</code></a>}<span about="_:EcsJIlAboV0u-cVjx_cxSK" rel="rdf:rest" resource="rdf:nil">)</span></span>
+              </span>
+            </span>
+          </dd>
         </dl>
         <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
       </section>
@@ -222,9 +241,20 @@
           </dl>
           <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
         </section>
+        <section id="fragment-list" about="[itcv:fragment-list]" typeof="owl:ObjectProperty">
+          <h4 property="rdfs:label"><code>fragment-list</code></h4>
+          <p property="rdfs:comment">Denotes an ordered list of <code>itcv:FragmentSpecifier</code>s that describes how a given class is to be treated as a fragment of another document.</p>
+          <dl>
+            <dt>Domain:</dt>
+            <dd><a rel="rdfs:domain" href="#Resolver"><code>itcv:Resolver</code></a></dd>
+            <dt>Range:</dt>
+            <dd><a rel="rdfs:range" href="#FragmentList"><code>itcv:FragmentList</code></a></dd>
+          </dl>
+          <p><a rel="rdfs:isDefinedBy" href="#">Back to Top</a></p>
+        </section>
         <section id="fragment-class" about="[itcv:fragment-class]" typeof="owl:ObjectProperty">
           <h4 property="rdfs:label"><code>fragment-class</code></h4>
-          <p property="rdfs:comment">The target class of an <code>itcv:FragmentSpecifier</code>.</p>
+          <p property="rdfs:comment">A target class of an <code>itcv:FragmentSpecifier</code>.</p>
           <dl>
             <dt>Domain:</dt>
             <dd><a rel="rdfs:domain" href="#FragmentSpecifier"><code>itcv:FragmentSpecifier</code></a></dd>

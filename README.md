@@ -10,6 +10,8 @@ September 6, 2023
 
 October 9, 2023
 
+October 29, 2023
+
 Namespace URI  
 [`https://vocab.methodandstructure.com/intertwingler#`](https://vocab.methodandstructure.com/intertwingler#)
 
@@ -178,6 +180,37 @@ rev="rdfs:domain"><code>itcv:document</code></a>
 
 <a href="https://vocab.methodandstructure.com/intertwingler#fragment"
 rev="rdfs:domain"><code>itcv:fragment</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="FragmentList" class="section" about="[itcv:FragmentList]"
+typeof="owl:Class">
+
+### `FragmentList`
+
+An `itcv:FragmentList` is a list of fragments and only fragments.
+
+Subclass of:  
+<a href="https://www.w3.org/TR/rdf-schema/#ch_list"
+rel="rdfs:subClassOf" resource="rdf:List"><code>rdf:List</code></a>
+
+Property restrictions:  
+<a href="https://www.w3.org/TR/rdf-schema/#ch_rest" rel="owl:onProperty"
+resource="rdf:rest"><code>rdf:rest</code></a> ∈ <span
+rel="owl:allValuesFrom" resource="_:EDH1Pu2CLR0UcP3ruqS0WJ"> <span
+rel="owl:unionOf" resource="_:EFNairIJBEcuyeqMUhxNSI">(<a
+href="https://vocab.methodandstructure.com/intertwingler#FragmentList"
+rel="rdf:first"><code>itcv:FragmentList</code></a> <span
+about="_:EFNairIJBEcuyeqMUhxNSI" rel="rdf:rest"
+resource="_:EcsJIlAboV0u-cVjx_cxSK">∪</span> <span
+about="_:EcsJIlAboV0u-cVjx_cxSK" rel="rdf:first"
+resource="_:EokiswwNRR4Nqyww5XrRsL">{<a href="https://www.w3.org/TR/rdf-schema/#ch_nil" rel="owl:hasValue"
+resource="rdf:nil"><code>rdf:nil</code></a>}<span
+about="_:EcsJIlAboV0u-cVjx_cxSK" rel="rdf:rest"
+resource="rdf:nil">)</span></span> </span> </span>
 
 <a href="https://vocab.methodandstructure.com/intertwingler#"
 rel="rdfs:isDefinedBy">Back to Top</a>
@@ -364,12 +397,34 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>
 
+<div id="fragment-list" class="section" about="[itcv:fragment-list]"
+typeof="owl:ObjectProperty">
+
+#### `fragment-list`
+
+Denotes an ordered list of `itcv:FragmentSpecifier`s that describes how
+a given class is to be treated as a fragment of another document.
+
+Domain:  
+<a href="https://vocab.methodandstructure.com/intertwingler#Resolver"
+rel="rdfs:domain"><code>itcv:Resolver</code></a>
+
+Range:  
+<a
+href="https://vocab.methodandstructure.com/intertwingler#FragmentList"
+rel="rdfs:range"><code>itcv:FragmentList</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
 <div id="fragment-class" class="section" about="[itcv:fragment-class]"
 typeof="owl:ObjectProperty">
 
 #### `fragment-class`
 
-The target class of an `itcv:FragmentSpecifier`.
+A target class of an `itcv:FragmentSpecifier`.
 
 Domain:  
 <a

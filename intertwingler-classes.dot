@@ -37,7 +37,7 @@ digraph {
         itcv_FragmentList -> rdf_List;
     }
 
-    // other third-party relations
+    // lists
 
     subgraph {
         edge [style=dashed, label="rdf:first"];
@@ -55,10 +55,11 @@ digraph {
     itcv_Resolver          -> rdfs_Resource [label="itcv:manages"];
     itcv_Resolver          -> sh_PrefixDeclaration [label="itcv:prefix"];
     itcv_Resolver          -> rdfs_Class [label="itcv:document"];
-    itcv_Resolver          -> itcv_FragmentSpecifier [label="itcv:fragment"];
+    itcv_Resolver          -> itcv_FragmentSpecifier [label="itcv:fragment-spec"];
     itcv_Resolver          -> itcv_FragmentList [label="itcv:fragment-list"];
-    itcv_FragmentSpecifier -> rdfs_Class [label="itcv:fragment-class"];
-    itcv_FragmentSpecifier -> rdfs_Class [label="itcv:host-class"];
+    itcv_FragmentSpecifier -> rdfs_Class [label="itcv:fragment"];
+    itcv_FragmentSpecifier -> rdfs_Class [label="itcv:host"];
+    itcv_FragmentSpecifier -> rdfs_Class [label="itcv:except"];
     itcv_FragmentSpecifier -> rdfs_Resource [label="itcv:via"];
     itcv_FragmentSpecifier -> itcv_FragmentSpecifier [label="itcv:supersedes"];
     itcv_Engine            -> itcv_Resolver [label="itcv:resolver"];

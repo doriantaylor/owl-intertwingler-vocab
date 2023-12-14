@@ -8,9 +8,12 @@ Taylor</span></a>
 Created  
 September 6, 2023
 
+Updated  
 October 9, 2023
 
 October 29, 2023
+
+November 18, 2023
 
 Namespace URI  
 [`https://vocab.methodandstructure.com/intertwingler#`](https://vocab.methodandstructure.com/intertwingler#)
@@ -234,6 +237,10 @@ rev="rdfs:domain"><code>itcv:fragment-class</code></a>
 <a href="https://vocab.methodandstructure.com/intertwingler#host-class"
 rev="rdfs:domain"><code>itcv:host-class</code></a>
 
+<a
+href="https://vocab.methodandstructure.com/intertwingler#except-class"
+rev="rdfs:domain"><code>itcv:except-class</code></a>
+
 <a href="https://vocab.methodandstructure.com/intertwingler#via"
 rev="rdfs:domain"><code>itcv:via</code></a>
 
@@ -375,10 +382,10 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>
 
-<div id="fragment" class="section" about="[itcv:fragment]"
+<div id="fragment-spec" class="section" about="[itcv:fragment-spec]"
 typeof="owl:ObjectProperty">
 
-#### `fragment`
+#### `fragment-spec`
 
 Denotes an `itcv:FragmentSpecifier` that describes how a given class is
 to be treated as a fragment of another document.
@@ -419,10 +426,10 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>
 
-<div id="fragment-class" class="section" about="[itcv:fragment-class]"
+<div id="fragment" class="section" about="[itcv:fragment]"
 typeof="owl:ObjectProperty">
 
-#### `fragment-class`
+#### `fragment`
 
 A target class of an `itcv:FragmentSpecifier`.
 
@@ -440,12 +447,34 @@ rel="rdfs:isDefinedBy">Back to Top</a>
 
 </div>
 
-<div id="host-class" class="section" about="[itcv:host-class]"
+<div id="host" class="section" about="[itcv:host]"
 typeof="owl:ObjectProperty">
 
-#### `host-class`
+#### `host`
 
 Specifies a class of host document.
+
+Domain:  
+<a
+href="https://vocab.methodandstructure.com/intertwingler#FragmentSpecifier"
+rel="rdfs:domain"><code>itcv:FragmentSpecifier</code></a>
+
+Range:  
+<a href="https://www.w3.org/TR/rdf-schema/#ch_class" rel="rdfs:range"
+resource="rdfs:Class"><code>rdfs:Class</code></a>
+
+<a href="https://vocab.methodandstructure.com/intertwingler#"
+rel="rdfs:isDefinedBy">Back to Top</a>
+
+</div>
+
+<div id="except" class="section" about="[itcv:except]"
+typeof="owl:ObjectProperty">
+
+#### `except`
+
+Specifies an `rdfs:Class`, e.g. a subclasswhich is explicitly *not* a
+host.
 
 Domain:  
 <a
